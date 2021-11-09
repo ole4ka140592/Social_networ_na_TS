@@ -1,3 +1,6 @@
+const ADD_POST = "ADD-POST"
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+
 export type PostsType = {
     id: number
     message: string
@@ -28,21 +31,21 @@ export type StoreType = {
     _state: RootStateType
     _rerenderEntireTree: () => void
     subscribe: (observer: () => void) => void
-    getState: ()=> RootStateType
-    dispatch: (action: ActionsTypes)=> void
+    getState: () => RootStateType
+    dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = AddPostActionType | updateNewPostTextType
+export type ActionsTypes = AddPostACType | updateNewPostTextACType
 
-type AddPostActionType = {
-    type: "ADD-POST"
-    newPostText: string
-}
+// type AddPostActionType = {
+//     type: "ADD-POST"
+//     newPostText: string
+// }
 
-type updateNewPostTextType = {
-    type: "UPDATE-NEW-POST-TEX"
-    newText: string
-}
+// type updateNewPostTextType = {
+//     type: "UPDATE-NEW-POST-TEXT"
+//     newText: string
+// }
 
 export let store: StoreType = {
     _state: {
@@ -92,14 +95,28 @@ export let store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ""
             this._rerenderEntireTree()
-        } else if (action.type === "UPDATE-NEW-POST-TEX") {
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.newPostText = action.newText
             this._rerenderEntireTree()
         }
-
     }
+}
 
+type AddPostACType = ReturnType<typeof addPostAC>
+type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 
+export const addPostAC = (newPostText: string) => {
+    return {
+        type: ADD_POST,
+        newPostText
+    } as const
+}
+
+export const updateNewPostTextAC = (newText: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText
+    } as const
 }
 
 
