@@ -1,5 +1,8 @@
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY"
+const SEND_MESSAGE = "SEND-MESSAGE"
+
 
 export type PostsType = {
     id: number
@@ -21,6 +24,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    newMessageBody: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -35,16 +39,14 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = AddPostACType | updateNewPostTextACType
+export type ActionsTypes = AddPostACType
+    | UpdateNewPostTextACType
+    | UpdateNewMessageBodyAC
+    | SendMessageAC
 
 // type AddPostActionType = {
 //     type: "ADD-POST"
 //     newPostText: string
-// }
-
-// type updateNewPostTextType = {
-//     type: "UPDATE-NEW-POST-TEXT"
-//     newText: string
 // }
 
 export let store: StoreType = {
@@ -71,7 +73,8 @@ export let store: StoreType = {
                 {id: 3, message: 'Yoy'},
                 {id: 4, message: 'Yoy'},
                 {id: 5, message: 'Yoy'},
-            ]
+            ],
+            newMessageBody: ""
         }
     },
     _rerenderEntireTree() {
@@ -98,12 +101,23 @@ export let store: StoreType = {
         } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.newPostText = action.newText
             this._rerenderEntireTree()
+        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._rerenderEntireTree()
+        } else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ""
+            this._state.dialogsPage.messages.push({id: 6, message: body})
+            this._rerenderEntireTree()
         }
     }
 }
 
 type AddPostACType = ReturnType<typeof addPostAC>
-type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
+type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
+type UpdateNewMessageBodyAC = ReturnType<typeof updateNewMessageBodyAC>
+type SendMessageAC = ReturnType<typeof sendMessageAC>
+
 
 export const addPostAC = (newPostText: string) => {
     return {
@@ -118,6 +132,23 @@ export const updateNewPostTextAC = (newText: string) => {
         newText
     } as const
 }
+
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body
+    } as const
+}
+
+export const sendMessageAC = () => {
+    return {
+        type: SEND_MESSAGE
+    } as const
+}
+
+
+
+
 
 
 
