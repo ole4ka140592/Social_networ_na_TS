@@ -1,36 +1,33 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, ChangeEventHandler, RefObject} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {
-    ActionsTypes,
     PostsType,
-
 } from "../../../redux/store";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
+
 
 type PropsTypeMyPosts = {
+    addPost: () => void
+    updateNewPostText: (text: string) => void
     posts: Array<PostsType>
     newPostText: string
-    dispatch: (action: ActionsTypes)=> void
 }
 
 export const MyPosts = (props: PropsTypeMyPosts) => {
 
-
     let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} like={p.like}/>)
 
-
-    let addPost = () => {
-        props.dispatch(addPostAC(props.newPostText))
-        props.dispatch(updateNewPostTextAC(""))
-        // props.addPost(props.newPostText)
-        // props.updateNewPostText('')
+    let onAddPost = () => {
+        props.addPost()
     }
+
+    let newPostElement : RefObject<HTMLTextAreaElement> = React.createRef()
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostTextAC(e.currentTarget.value))
-        // props.updateNewPostText(e.currentTarget.value)
+        let text=e.currentTarget.value
+        props.updateNewPostText(text)
     }
+
 
     return (
         <div className={classes.postsBlock}>
@@ -39,10 +36,12 @@ export const MyPosts = (props: PropsTypeMyPosts) => {
                 <div>
                     <textarea
                         value={props.newPostText}
-                        onChange={onPostChange}/>
+                        onChange={onPostChange}
+                        ref={newPostElement}
+                        />
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={classes.posts}>
