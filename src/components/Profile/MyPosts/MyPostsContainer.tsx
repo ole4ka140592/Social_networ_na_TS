@@ -6,9 +6,6 @@ import {MyPosts} from "./MyPosts";
 
 
 type MyPostsContainerType = {
-    // posts: Array<PostsType>
-    // newPostText: string
-    // dispatch: (action: ActionsTypes) => void
     store: StoreType
 }
 

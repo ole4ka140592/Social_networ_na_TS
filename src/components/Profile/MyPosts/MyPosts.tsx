@@ -1,9 +1,7 @@
 import React, {ChangeEvent, ChangeEventHandler, RefObject} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {
-    PostsType,
-} from "../../../redux/store";
+import {PostsType} from "../../../redux/store";
 
 
 type PropsTypeMyPosts = {
