@@ -2,36 +2,36 @@ import {AddPostACType, profileReducer, UpdateNewPostTextACType} from "./profileR
 import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 
-export type PostsType = {
+type PostsType = {
     id: number
     message: string
     like: number
 }
-export type DialogsType = {
+type DialogsType = {
     id: number
     name: string
 }
-export type MessagesType = {
+type MessagesType = {
     id: number
     message: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
     newMessageBody: string
 }
-export type SidebarType = {}
-export type RootStateType = {
+type SidebarType = {}
+type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     _rerenderEntireTree: () => void
     subscribe: (observer: () => void) => void
@@ -39,12 +39,12 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = AddPostACType
+type ActionsTypes = AddPostACType
     | UpdateNewPostTextACType
     | UpdateNewMessageBodyAC
     | SendMessageAC
 
-export let store: StoreType = {
+let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -92,6 +92,7 @@ export let store: StoreType = {
         this._rerenderEntireTree()
     }
 }
+
 
 
 

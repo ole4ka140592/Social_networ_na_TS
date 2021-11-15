@@ -1,20 +1,31 @@
-import {ActionsTypes, PostsType, ProfilePageType} from "./store";
+import {ActionsTypes} from "./reduxStore";
 
-let initialState = {
+export type PostsType = {
+    id: number
+    message: string
+    like: number
+}
+
+
+
+
+let profilePageState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', like: 15},
         {id: 2, message: 'It is my first post', like: 20}
-    ],
+    ] as Array<PostsType>,
     newPostText: ''
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+export type ProfilePageStateType = typeof profilePageState
+
+export const profileReducer = (state: ProfilePageStateType = profilePageState, action: ActionsTypes): ProfilePageStateType => {
     switch (action.type) {
 
         case "ADD-POST": {
             const newPost: PostsType = {
                 id: new Date().getTime(),
-                message: action.newPostText,
+                message: state.newPostText,
                 like: 0
             }
             state.posts.push(newPost)
@@ -33,10 +44,9 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 
 export type AddPostACType = ReturnType<typeof addPostAC>
 
-export const addPostAC = (newPostText: string) => {
+export const addPostAC = () => {
     return {
         type: "ADD-POST",
-        newPostText
     } as const
 }
 
