@@ -35,8 +35,10 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
         }
 
         case "UPDATE-NEW-POST-TEXT": {
-            let stateCopy = {...state}
-            stateCopy.newPostText = action.newText
+            let stateCopy = {...state,
+                newPostText: action.newText
+            }
+
             return stateCopy
         }
 
