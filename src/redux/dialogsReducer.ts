@@ -36,24 +36,32 @@ export let dialogsPageState = {
 export type DialogsPageStateType = typeof dialogsPageState
 
 
-export const dialogsReducer = (state : DialogsPageStateType = dialogsPageState,
+export const dialogsReducer = (state: DialogsPageStateType = dialogsPageState,
                                action: ActionsTypes): DialogsPageStateType => {
 
-    switch (action.type) {
 
+    switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY": {
-            state.newMessageBody = action.body
-            return state
+            let stateCopy = {
+                ...state,
+                newMessageBody: action.body
+            }
+            return stateCopy
         }
 
         case "SEND-MESSAGE": {
             let body = state.newMessageBody
-            state.newMessageBody = ""
-            state.messages.push({id: 6, message: body})
-            return state
+            let stateCopy = {
+                ...state,
+                newMessageBody : "",
+                messages: [...state.messages, {id: 6, message: body}]
+            }
+
+            return stateCopy
         }
 
-        default: return state
+        default:
+            return state
     }
 }
 

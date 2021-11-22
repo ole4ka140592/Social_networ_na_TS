@@ -6,9 +6,6 @@ export type PostsType = {
     like: number
 }
 
-
-
-
 let profilePageState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', like: 15},
@@ -19,7 +16,8 @@ let profilePageState = {
 
 export type ProfilePageStateType = typeof profilePageState
 
-export const profileReducer = (state: ProfilePageStateType = profilePageState, action: ActionsTypes): ProfilePageStateType => {
+export const profileReducer = (state: ProfilePageStateType = profilePageState,
+                               action: ActionsTypes): ProfilePageStateType => {
     switch (action.type) {
 
         case "ADD-POST": {
@@ -28,19 +26,25 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState, a
                 message: state.newPostText,
                 like: 0
             }
-            state.posts.push(newPost)
-            state.newPostText = ""
-            return state
+            let stateCopy = {...state,
+                posts: [...state.posts, newPost],
+                newPostText: ""
+            }
+
+            return stateCopy
         }
 
         case "UPDATE-NEW-POST-TEXT": {
-            state.newPostText = action.newText
-            return state
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newText
+            return stateCopy
         }
 
         default: return state
     }
 }
+
+export type ProfileReducerType = AddPostACType | UpdateNewPostTextACType
 
 export type AddPostACType = ReturnType<typeof addPostAC>
 
