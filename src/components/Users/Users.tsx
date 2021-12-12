@@ -7,51 +7,56 @@ type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export const Users = (props: UsersPropsType) => {
 
-    if (props.usersPage.users.length === 0) {
+    let getUsers = () => {
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            debugger
-            props.setUsers(response.data.items
-                // [
-                // {
-                //     id: 1,
-                //     photoURL: "https://mark.moda/assets/user-37f217572f43e0f624f3f5d33513eca4a84090f7b0f07517d058f0d7de410772.png",
-                //     followed: false,
-                //     fullName: 'Dmitry',
-                //     status: "I am boss",
-                //     location: {city: "Minsk", country: "Belarus"}
-                // },
-                // {
-                //     id: 2,
-                //     photoURL: "https://mark.moda/assets/user-37f217572f43e0f624f3f5d33513eca4a84090f7b0f07517d058f0d7de410772.png",
-                //     followed: true,
-                //     fullName: 'Andrey',
-                //     status: "I am boss",
-                //     location: {city: "Moscow", country: "Russia"}
-                // },
-                // {
-                //     id: 3,
-                //     photoURL: "https://mark.moda/assets/user-37f217572f43e0f624f3f5d33513eca4a84090f7b0f07517d058f0d7de410772.png",
-                //     followed: false,
-                //     fullName: 'Svetlana',
-                //     status: "I am boss",
-                //     location: {city: "Kiev", country: "Ukraine"}
-                // }
-            // ]
-        )
-        })
+        if (props.usersPage.users.length === 0) {
 
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                debugger
+                props.setUsers(response.data.items
+                    // [
+                    // {
+                    //     id: 1,
+                    //     photoURL: "https://mark.moda/assets/user-37f217572f43e0f624f3f5d33513eca4a84090f7b0f07517d058f0d7de410772.png",
+                    //     followed: false,
+                    //     fullName: 'Dmitry',
+                    //     status: "I am boss",
+                    //     location: {city: "Minsk", country: "Belarus"}
+                    // },
+                    // {
+                    //     id: 2,
+                    //     photoURL: "https://mark.moda/assets/user-37f217572f43e0f624f3f5d33513eca4a84090f7b0f07517d058f0d7de410772.png",
+                    //     followed: true,
+                    //     fullName: 'Andrey',
+                    //     status: "I am boss",
+                    //     location: {city: "Moscow", country: "Russia"}
+                    // },
+                    // {
+                    //     id: 3,
+                    //     photoURL: "https://mark.moda/assets/user-37f217572f43e0f624f3f5d33513eca4a84090f7b0f07517d058f0d7de410772.png",
+                    //     followed: false,
+                    //     fullName: 'Svetlana',
+                    //     status: "I am boss",
+                    //     location: {city: "Kiev", country: "Ukraine"}
+                    // }
+                    // ]
+                )
+            })
 
+        }
     }
 
     return (
+
         <div>
+            <button onClick={getUsers}>Get USERS</button>
             {
                 props.usersPage.users.map(m =>
                     <div key={m.id}>
                         <span>
                             <div>
-                                <img src={m.photos.small != null ? m.photos.small : userPhoto} className={classes.photo}/>
+                                <img src={m.photos.small != null ? m.photos.small : userPhoto}
+                                     className={classes.photo}/>
                             </div>
                             <div>
                                 {m.followed

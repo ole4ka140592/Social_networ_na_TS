@@ -6,7 +6,7 @@ const SET_USERS = "SET_USERS"
 
 export type UserType = {
     id: number
-    photos: string
+    photos: string | any
     followed: boolean
     name: string
     status: string
