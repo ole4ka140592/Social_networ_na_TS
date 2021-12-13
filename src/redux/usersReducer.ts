@@ -17,7 +17,9 @@ export type UserType = {
 }
 
 export let usersPageState = {
-    users: [] as Array<UserType>
+    users: [] as Array<UserType>,
+    totalUsersCount: 0,
+    pageSize: 5
 }
 
 export type UsersPageStateType = typeof usersPageState

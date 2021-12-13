@@ -7,7 +7,9 @@ import {UsersCl} from "./UsersCl";
 
 
 export type MapStateToPropsType = {
-    usersPage: UsersPageStateType
+    usersPage: UsersPageStateType,
+    pageSize: number,
+    totalUsersCount: number
 }
 
 export type MapDispatchToPropsType = {
@@ -18,7 +20,9 @@ export type MapDispatchToPropsType = {
 
 function mapStateToProps(state: AppStateType): MapStateToPropsType {
     return {
-        usersPage: state.usersPage
+        usersPage: state.usersPage,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount
     }
 }
 

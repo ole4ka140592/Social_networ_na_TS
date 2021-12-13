@@ -15,6 +15,9 @@ export class UsersCl extends React.Component<UsersPropsType> {
     }
 
     render() {
+
+        let pageCount = this.props.totalUsersCount / this.props.pageSize
+
         return (
 
             <div>
