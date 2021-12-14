@@ -3,6 +3,7 @@ import classes from './Users.module.css'
 import axios from "axios";
 import userPhoto from "../../assets/images/user.png"
 import React from "react";
+import {AppStateType} from "../../redux/reduxStore";
 
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -16,18 +17,22 @@ export class UsersCl extends React.Component<UsersPropsType> {
 
     render() {
 
-        let pageCount = this.props.totalUsersCount / this.props.pageSize
+        let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pageCount; i++) {
+            pages.push(i)
+        }
 
         return (
-
             <div>
+                {pages.map(m => <span className={this.props.currentPage === m ? classes.selectedPage : ""}>{m}</span>)}
 
                 {
                     this.props.usersPage.users.map(m =>
                         <div key={m.id}>
                         <span>
                             <div>
-                                <img src={m.photos.small != null ? m.photos.small : userPhoto}
+                                <img src={m.photos.small !== null ? m.photos.small : userPhoto} alt=""
                                      className={classes.photo}/>
                             </div>
                             <div>

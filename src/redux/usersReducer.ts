@@ -6,7 +6,10 @@ const SET_USERS = "SET_USERS"
 
 export type UserType = {
     id: number
-    photos: string | any
+    photos: {
+        small: string,
+        large: string
+    }
     followed: boolean
     name: string
     status: string
@@ -18,8 +21,9 @@ export type UserType = {
 
 export let usersPageState = {
     users: [] as Array<UserType>,
-    totalUsersCount: 0,
-    pageSize: 5
+    totalUsersCount: 19,
+    pageSize: 5,
+    currentPage: 2
 }
 
 export type UsersPageStateType = typeof usersPageState
