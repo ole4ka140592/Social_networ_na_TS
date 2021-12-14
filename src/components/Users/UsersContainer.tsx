@@ -3,7 +3,7 @@ import {Users} from "./Users";
 import {AppStateType} from "../../redux/reduxStore";
 import {
     followAC,
-    setCurrentPageAC,
+    setCurrentPageAC, setTotalUsersCountAC,
     setUsersAC,
     unfollowAC,
     UsersPageStateType,
@@ -25,6 +25,7 @@ export type MapDispatchToPropsType = {
     unfollow: (userID: number) => void
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalCount: number) => void
 }
 
 function mapStateToProps(state: AppStateType): MapStateToPropsType {
@@ -49,6 +50,9 @@ function mapDispatchToProps(dispatch: Dispatch): MapDispatchToPropsType {
         },
         setCurrentPage: (pageNumber: number) => {
             dispatch(setCurrentPageAC(pageNumber))
+        },
+        setTotalUsersCount: (totalCount: number) => {
+            dispatch(setTotalUsersCountAC(totalCount))
         }
     }
 }

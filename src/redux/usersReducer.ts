@@ -3,7 +3,8 @@ import {ActionsTypes} from "./reduxStore";
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
-const SET_CURRENT_PAGE= "SET_CURRENT_PAGE"
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 
 export type UserType = {
     id: number
@@ -29,7 +30,7 @@ export type UsersPageStateType = {
 
 export let usersPageState = {
     users: [],
-    totalUsersCount: 19,
+    totalUsersCount: 0,
     pageSize: 5,
     currentPage: 2,
 
@@ -57,21 +58,23 @@ export const usersReducer = (state: UsersPageStateType = usersPageState,
         }
 
         case SET_USERS: {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
         }
 
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
         }
 
-
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.totalCount}
+        }
 
         default:
             return state
     }
 }
 
-export type UsersReducerType = FollowAC | UnfollowAC | SetUsersAC | SetCurrentPageAC
+export type UsersReducerType = FollowAC | UnfollowAC | SetUsersAC | SetCurrentPageAC | SetTotalUsersCountAC
 
 export type FollowAC = ReturnType<typeof followAC>
 
@@ -106,5 +109,14 @@ export const setCurrentPageAC = (currentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
+    } as const
+}
+
+export type SetTotalUsersCountAC = ReturnType<typeof setTotalUsersCountAC>
+
+export const setTotalUsersCountAC = (totalCount: number) => {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        totalCount
     } as const
 }

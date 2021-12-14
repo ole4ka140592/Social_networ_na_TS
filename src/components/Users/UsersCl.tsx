@@ -2,7 +2,7 @@ import {MapDispatchToPropsType, MapStateToPropsType} from "./UsersContainer";
 import classes from './Users.module.css'
 import axios from "axios";
 import userPhoto from "../../assets/images/user.png"
-import React from "react";
+import React, {ChangeEvent, DetailedHTMLProps, HTMLAttributes, MouseEventHandler} from "react";
 import {AppStateType} from "../../redux/reduxStore";
 
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -10,6 +10,14 @@ type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 export class UsersCl extends React.Component<UsersPropsType> {
 
     componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
+        })
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
         })
@@ -26,7 +34,7 @@ export class UsersCl extends React.Component<UsersPropsType> {
         return (
             <div>
                 {pages.map(m => <span className={this.props.currentPage === m ? classes.selectedPage : ""}
-                onClick={()=> {this.props.setCurrentPage(m)}}>{m}</span>)}
+                onClick={(e)=> {this.onPageChanged(m)}}>{m}</span>)}
 
                 {
                     this.props.usersPage.users.map(m =>
