@@ -9,7 +9,7 @@ export const Users = (props: UsersPropsType) => {
 
     let getUsers = () => {
 
-        if (props.usersPage.users.length === 0) {
+        if (props.users.length === 0) {
 
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
 
@@ -51,7 +51,7 @@ export const Users = (props: UsersPropsType) => {
         <div>
             <button onClick={getUsers}>Get USERS</button>
             {
-                props.usersPage.users.map(m =>
+                props.users.map(m =>
                     <div key={m.id}>
                         <span>
                             <div>
