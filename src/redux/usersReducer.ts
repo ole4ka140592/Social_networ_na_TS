@@ -3,30 +3,39 @@ import {ActionsTypes} from "./reduxStore";
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
+const SET_CURRENT_PAGE= "SET_CURRENT_PAGE"
 
 export type UserType = {
     id: number
+    name: string
+    status: string
     photos: {
         small: string,
         large: string
     }
     followed: boolean
-    name: string
-    status: string
     location: {
         city: string
         country: string
     }
 }
 
-export let usersPageState = {
-    users: [] as Array<UserType>,
-    totalUsersCount: 19,
-    pageSize: 5,
-    currentPage: 2
+export type UsersPageStateType = {
+    users: Array<UserType>,
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
 }
 
-export type UsersPageStateType = typeof usersPageState
+export let usersPageState = {
+    users: [],
+    totalUsersCount: 19,
+    pageSize: 5,
+    currentPage: 2,
+
+}
+
+// export type UsersPageStateType = typeof usersPageState
 
 export const usersReducer = (state: UsersPageStateType = usersPageState,
                              action: ActionsTypes): UsersPageStateType => {
@@ -51,12 +60,18 @@ export const usersReducer = (state: UsersPageStateType = usersPageState,
             return {...state, users: [...state.users, ...action.users]}
         }
 
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+
+
+
         default:
             return state
     }
 }
 
-export type UsersReducerType = FollowAC | UnfollowAC | SetUsersAC
+export type UsersReducerType = FollowAC | UnfollowAC | SetUsersAC | SetCurrentPageAC
 
 export type FollowAC = ReturnType<typeof followAC>
 
@@ -82,5 +97,14 @@ export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
         users
+    } as const
+}
+
+export type SetCurrentPageAC = ReturnType<typeof setCurrentPageAC>
+
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage
     } as const
 }

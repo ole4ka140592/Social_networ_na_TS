@@ -10,7 +10,7 @@ type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 export class UsersCl extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
         })
     }
@@ -25,7 +25,8 @@ export class UsersCl extends React.Component<UsersPropsType> {
 
         return (
             <div>
-                {pages.map(m => <span className={this.props.currentPage === m ? classes.selectedPage : ""}>{m}</span>)}
+                {pages.map(m => <span className={this.props.currentPage === m ? classes.selectedPage : ""}
+                onClick={()=> {this.props.setCurrentPage(m)}}>{m}</span>)}
 
                 {
                     this.props.usersPage.users.map(m =>

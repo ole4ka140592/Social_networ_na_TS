@@ -1,7 +1,14 @@
 import {connect} from "react-redux";
 import {Users} from "./Users";
 import {AppStateType} from "../../redux/reduxStore";
-import {followAC, setUsersAC, unfollowAC, UsersPageStateType, UserType} from "../../redux/usersReducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setUsersAC,
+    unfollowAC,
+    UsersPageStateType,
+    UserType
+} from "../../redux/usersReducer";
 import {Dispatch} from "redux";
 import {UsersCl} from "./UsersCl";
 
@@ -17,6 +24,7 @@ export type MapDispatchToPropsType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     setUsers: (users: Array<UserType>) => void
+    setCurrentPage: (pageNumber: number) => void
 }
 
 function mapStateToProps(state: AppStateType): MapStateToPropsType {
@@ -38,6 +46,9 @@ function mapDispatchToProps(dispatch: Dispatch): MapDispatchToPropsType {
         },
         setUsers: (users: Array<UserType>) => {
             dispatch(setUsersAC(users))
+        },
+        setCurrentPage: (pageNumber: number) => {
+            dispatch(setCurrentPageAC(pageNumber))
         }
     }
 }
