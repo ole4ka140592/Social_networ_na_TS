@@ -12,6 +12,7 @@ import React from "react";
 import axios from "axios";
 import {UsersPresentationComponent} from "./UsersPresentationComponent";
 import loading from "../../assets/images/loading.gif"
+import {Preloader} from "../common/Preloader/Preloader";
 
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -37,7 +38,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <img src={loading}/> : ""}
+            {this.props.isFetching ? <Preloader/> : ""}
             <UsersPresentationComponent onPageChanged={this.onPageChanged}
                                         totalUsersCount={this.props.totalUsersCount}
                                         pageSize={this.props.pageSize}
