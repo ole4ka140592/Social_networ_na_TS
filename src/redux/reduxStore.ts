@@ -1,12 +1,12 @@
 import {combineReducers, createStore} from "redux";
-import {AddPostACType, profileReducer, UpdateNewPostTextACType} from "./profileReducer";
+import {AddPostType, profileReducer, UpdateNewPostTextType} from "./profileReducer";
 import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {sidebarReducer, SidebarType} from "./sidebarReducer";
 import {usersReducer, UsersReducerType} from "./usersReducer";
 
 
-export type ActionsTypes = AddPostACType
-    | UpdateNewPostTextACType
+export type ActionsTypes = AddPostType
+    | UpdateNewPostTextType
     | UpdateNewMessageBodyAC
     | SendMessageAC
     | UsersReducerType

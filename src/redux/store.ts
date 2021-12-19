@@ -1,4 +1,4 @@
-import {AddPostACType, profileReducer, UpdateNewPostTextACType} from "./profileReducer";
+import {AddPostType, profileReducer, UpdateNewPostTextType} from "./profileReducer";
 import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 
@@ -39,8 +39,8 @@ type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-type ActionsTypes = AddPostACType
-    | UpdateNewPostTextACType
+type ActionsTypes = AddPostType
+    | UpdateNewPostTextType
     | UpdateNewMessageBodyAC
     | SendMessageAC
 
