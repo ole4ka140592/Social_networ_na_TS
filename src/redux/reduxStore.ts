@@ -2,7 +2,7 @@ import {combineReducers, createStore} from "redux";
 import {AddPostACType, profileReducer, UpdateNewPostTextACType} from "./profileReducer";
 import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {sidebarReducer, SidebarType} from "./sidebarReducer";
-import {FollowAC, SetUsersAC, UnfollowAC, usersReducer, UsersReducerType} from "./usersReducer";
+import {usersReducer, UsersReducerType} from "./usersReducer";
 
 
 export type ActionsTypes = AddPostACType

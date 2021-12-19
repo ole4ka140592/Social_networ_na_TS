@@ -82,61 +82,61 @@ export const usersReducer = (state: UsersPageStateType = usersPageState,
 }
 
 export type UsersReducerType =
-    FollowAC
-    | UnfollowAC
-    | SetUsersAC
-    | SetCurrentPageAC
-    | SetTotalUsersCountAC
-    | SetFetchingAC
+    Follow
+    | Unfollow
+    | SetUsers
+    | SetCurrentPage
+    | SetTotalUsersCount
+    | SetFetching
 
-export type FollowAC = ReturnType<typeof followAC>
+export type Follow = ReturnType<typeof follow>
 
-export const followAC = (userID: number) => {
+export const follow = (userID: number) => {
     return {
         type: FOLLOW,
         userID
     } as const
 }
 
-export type UnfollowAC = ReturnType<typeof unfollowAC>
+export type Unfollow = ReturnType<typeof unfollow>
 
-export const unfollowAC = (userID: number) => {
+export const unfollow = (userID: number) => {
     return {
         type: UNFOLLOW,
         userID
     } as const
 }
 
-export type SetUsersAC = ReturnType<typeof setUsersAC>
+export type SetUsers = ReturnType<typeof setUsers>
 
-export const setUsersAC = (users: Array<UserType>) => {
+export const setUsers = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
         users
     } as const
 }
 
-export type SetCurrentPageAC = ReturnType<typeof setCurrentPageAC>
+export type SetCurrentPage = ReturnType<typeof setCurrentPage>
 
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
     } as const
 }
 
-export type SetTotalUsersCountAC = ReturnType<typeof setTotalUsersCountAC>
+export type SetTotalUsersCount = ReturnType<typeof setTotalUsersCount>
 
-export const setTotalUsersCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalCount
     } as const
 }
 
-export type SetFetchingAC = ReturnType<typeof setFetchingAC>
+export type SetFetching = ReturnType<typeof setFetching>
 
-export const setFetchingAC = (isFetching: boolean) => {
+export const setFetching = (isFetching: boolean) => {
     return {
         type: SET_FETCHING,
         isFetching: isFetching
