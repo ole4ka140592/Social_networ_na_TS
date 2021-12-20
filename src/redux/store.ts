@@ -1,4 +1,4 @@
-import {AddPostType, profileReducer, UpdateNewPostTextType} from "./profileReducer";
+import {AddPostType, profileReducer, ProfileType, UpdateNewPostTextType} from "./profileReducer";
 import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 
@@ -18,6 +18,7 @@ type MessagesType = {
 type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    profile: ProfileType | null
 }
 type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -51,7 +52,8 @@ let store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', like: 15},
                 {id: 2, message: 'It is my first post', like: 20}
             ],
-            newPostText: ''
+            newPostText: '',
+            profile: {} as ProfileType | null
         },
         dialogsPage: {
             dialogs: [

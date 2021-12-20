@@ -1,7 +1,18 @@
 import React from "react";
 import classes from './ProfileInfo.module.css'
+import {ProfileType} from "../../../redux/profileReducer";
+import {Preloader} from "../../common/Preloader/Preloader";
 
-export const ProfileInfo = () => {
+type ProfileInfoPropsType = {
+    profile: ProfileType | null
+}
+
+export const ProfileInfo = (props: ProfileInfoPropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
+    debugger
+
     return (
         <div>
             <div>
@@ -9,7 +20,10 @@ export const ProfileInfo = () => {
             </div>
 
             <div className={classes.descriptionBlock}>
-                ava + description
+                <div>ava + description</div>
+                <ul>
+                    <li><span>aboutMe: </span>{props.profile.aboutMe}</li>
+                </ul>
             </div>
 
         </div>
