@@ -1,18 +1,16 @@
 import {MapDispatchToPropsType, MapStateToPropsType} from "./UsersContainer";
 import classes from './Users.module.css'
 import axios from "axios";
-import userPhoto from "../../assets/images/user.png"
+import userPhoto from "../../assets/images/user.png";
+
 
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export const Users = (props: UsersPropsType) => {
 
     let getUsers = () => {
-
         if (props.users.length === 0) {
-
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-
                 props.setUsers(response.data.items
                     // [
                     // {
@@ -42,12 +40,10 @@ export const Users = (props: UsersPropsType) => {
                     // ]
                 )
             })
-
         }
     }
 
     return (
-
         <div>
             <button onClick={getUsers}>Get USERS</button>
             {
@@ -55,8 +51,7 @@ export const Users = (props: UsersPropsType) => {
                     <div key={m.id}>
                         <span>
                             <div>
-                                <img src={m.photos.small != null ? m.photos.small : userPhoto}
-                                     className={classes.photo}/>
+                                <img src={m.photos.small != null ? m.photos.small : userPhoto} className={classes.photo}/>
                             </div>
                             <div>
                                 {m.followed
@@ -79,8 +74,6 @@ export const Users = (props: UsersPropsType) => {
                                 <div>{"m.location.city"}</div>
                             </span>
                         </span>
-
-
                     </div>)
             }
         </div>

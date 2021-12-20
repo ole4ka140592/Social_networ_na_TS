@@ -2,6 +2,7 @@ import classes from './Users.module.css'
 import userPhoto from "../../assets/images/user.png"
 import React from "react";
 import {UsersPageStateType, UserType} from "../../redux/usersReducer";
+import {NavLink} from "react-router-dom";
 
 
 type UsersPresentationComponentPropsType = {
@@ -33,8 +34,10 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                         <div key={m.id}>
                         <span>
                             <div>
+                                <NavLink to={"/profile/" + m.id}>
                                 <img src={m.photos.small !== null ? m.photos.small : userPhoto} alt=""
                                      className={classes.photo}/>
+                                    </NavLink>
                             </div>
                             <div>
                                 {m.followed
