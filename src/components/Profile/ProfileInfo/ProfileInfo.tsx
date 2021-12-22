@@ -21,10 +21,10 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
             <div className={classes.descriptionBlock}>
                 <div>ava + description</div>
-                <ul>
-                    <li><span>aboutMe: </span>{props.profile.aboutMe}</li>
-                    <li><span>aboutMe: </span>{props.profile.userId}</li>
-                </ul>
+
+                    {props.profile.aboutMe}
+
+
             </div>
 
         </div>
