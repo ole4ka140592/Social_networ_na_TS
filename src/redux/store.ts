@@ -18,7 +18,7 @@ type MessagesType = {
 type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
-    profile: ProfileType | null
+    profile: ProfileType
 }
 type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -53,7 +53,7 @@ let store: StoreType = {
                 {id: 2, message: 'It is my first post', like: 20}
             ],
             newPostText: '',
-            profile: {} as ProfileType | null
+            profile: {} as ProfileType
         },
         dialogsPage: {
             dialogs: [

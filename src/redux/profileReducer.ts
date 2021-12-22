@@ -8,25 +8,27 @@ export type PostsType = {
     like: number
 }
 
+type ContactsType = {
+    facebook: string,
+    website: string,
+    vk: string | undefined | null,
+    twitter: string,
+    instagram: string,
+    youtube: string,
+    github: string,
+    mainLink: string
+}
+
 export type ProfileType = {
+    userId: string,
     aboutMe: null | string,
-    contacts: {
-        facebook: null | string,
-        website: null | string,
-        vk: null | string,
-        twitter: null | string,
-        instagram: null | string,
-        youtube: null | string,
-        github: null | string,
-        mainLink: null | string
-    },
+    contacts: ContactsType,
     lookingForAJob: boolean,
-    lookingForAJobDescription: null | string,
-    fullName: null | string,
-    userId: number,
+    lookingForAJobDescription: string,
+    fullName: string,
     photos: {
-        "small": null | string,
-        "large": null | string
+        small: string,
+        large: string
     }
 }
 
@@ -36,7 +38,7 @@ let profilePageState = {
         {id: 2, message: 'It is my first post', like: 20}
     ] as Array<PostsType>,
     newPostText: '',
-    profile: {} as ProfileType | null
+    profile: {} as ProfileType
 }
 
 export type ProfilePageStateType = typeof profilePageState
@@ -96,7 +98,7 @@ export const updateNewPostText = (newText: string) => {
 
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
 
-export const setUserProfile = (profile: ProfileType | null) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile

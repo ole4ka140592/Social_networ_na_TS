@@ -4,7 +4,7 @@ import {ProfileType} from "../../../redux/profileReducer";
 import {Preloader} from "../../common/Preloader/Preloader";
 
 type ProfileInfoPropsType = {
-    profile: ProfileType | null
+    profile: ProfileType
 }
 
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -23,6 +23,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <div>ava + description</div>
                 <ul>
                     <li><span>aboutMe: </span>{props.profile.aboutMe}</li>
+                    <li><span>aboutMe: </span>{props.profile.userId}</li>
                 </ul>
             </div>
 
