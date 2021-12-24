@@ -3,6 +3,7 @@ import {AddPostType, profileReducer, ProfileReducerType, UpdateNewPostTextType} 
 import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {sidebarReducer, SidebarType} from "./sidebarReducer";
 import {usersReducer, UsersReducerType} from "./usersReducer";
+import {authReducer, AuthReducerType} from "./authReducer";
 
 
 export type ActionsTypes = AddPostType
@@ -11,6 +12,8 @@ export type ActionsTypes = AddPostType
     | SendMessageAC
     | UsersReducerType
     | ProfileReducerType
+    | AuthReducerType
+
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
@@ -18,7 +21,8 @@ let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    authPage: authReducer
 })
 
 export let store = createStore(rootReducer)
