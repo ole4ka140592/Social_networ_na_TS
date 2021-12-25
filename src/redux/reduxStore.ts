@@ -22,7 +22,7 @@ let rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
-    authPage: authReducer
+    auth: authReducer
 })
 
 export let store = createStore(rootReducer)

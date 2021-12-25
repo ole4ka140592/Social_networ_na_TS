@@ -46,7 +46,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
 }
 
 
-export type MapStateToPropsType = {
+type MapStateToPropsType = {
     users: Array<UserType>,
     // usersPage: UsersPageStateType,
     pageSize: number,
