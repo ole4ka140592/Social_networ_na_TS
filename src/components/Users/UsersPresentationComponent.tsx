@@ -46,7 +46,9 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                                 {m.followed
                                     ? <button onClick={() => {
                                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
-                                             {withCredentials: true})
+                                             {withCredentials: true,
+                                             headers: {"API-KEY": "3ffd8bee-6a2a-4b2d-9367-b8070697f4c5"}
+                                             })
                                             .then(response => {
                                                 if (response.data.resultCode === 0) {
                                                     props.unfollow(m.id)
@@ -56,7 +58,9 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                                     }}>Follow</button>
                                     : <button onClick={() => {
                                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
-                                            {}, {withCredentials: true})
+                                            {}, {withCredentials: true,
+                                                headers: {"API-KEY": "3ffd8bee-6a2a-4b2d-9367-b8070697f4c5"}
+                                        })
                                             .then(response => {
                                                 if (response.data.resultCode === 0) {
                                                     props.follow(m.id)
