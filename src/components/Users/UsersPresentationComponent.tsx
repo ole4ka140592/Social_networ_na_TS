@@ -3,10 +3,11 @@ import userPhoto from "../../assets/images/user.png"
 import React from "react";
 import {UsersPageStateType, UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 type UsersPresentationComponentPropsType = {
-    onPageChanged: (pageNumber: number)=> void
+    onPageChanged: (pageNumber: number) => void
     totalUsersCount: number
     pageSize: number
     currentPage: number
@@ -17,21 +18,23 @@ type UsersPresentationComponentPropsType = {
 
 export const UsersPresentationComponent = (props: UsersPresentationComponentPropsType) => {
 
-        let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
-        let pages = []
-        for (let i = 1; i <= pageCount; i++) {
-            pages.push(i)
-        }
+    let pages = []
+    for (let i = 1; i <= pageCount; i++) {
+        pages.push(i)
+    }
 
-        return (
-            <div>
+    return (
+        <div>
                 <span>{pages.map(m => <span className={props.currentPage === m ? classes.selectedPage : ""}
-                onClick={(e)=> {props.onPageChanged(m)}}>{m}</span>)}
+                                            onClick={(e) => {
+                                                props.onPageChanged(m)
+                                            }}>{m}</span>)}
                 </span>
-                {
-                    props.users.map(m =>
-                        <div key={m.id}>
+            {
+                props.users.map(m =>
+                    <div key={m.id}>
                         <span>
                             <div>
                                 <NavLink to={"/profile/" + m.id}>
@@ -42,15 +45,30 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                             <div>
                                 {m.followed
                                     ? <button onClick={() => {
-                                        props.unfollow(m.id)
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
+                                             {withCredentials: true})
+                                            .then(response => {
+                                                if (response.data.resultCode === 0) {
+                                                    props.unfollow(m.id)
+                                                }
+                                            })
+
                                     }}>Follow</button>
                                     : <button onClick={() => {
-                                        props.follow(m.id)
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
+                                            {}, {withCredentials: true})
+                                            .then(response => {
+                                                if (response.data.resultCode === 0) {
+                                                    props.follow(m.id)
+                                                }
+                                            })
+                                        
+
                                     }}>Unfollow</button>
                                 }
                             </div>
                         </span>
-                            <span>
+                        <span>
                             <span>
                                 <div>{m.name}</div>
                                 <div>{m.status}</div>
@@ -62,8 +80,8 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                         </span>
 
 
-                        </div>)
-                }
-            </div>
-        )
-    }
+                    </div>)
+            }
+        </div>
+    )
+}
