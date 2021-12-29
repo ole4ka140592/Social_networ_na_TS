@@ -27,8 +27,8 @@ export type ProfileType = {
     lookingForAJobDescription: string,
     fullName: string,
     photos: {
-        small: string,
-        large: string
+        small: string | null,
+        large: string | null
     }
 }
 

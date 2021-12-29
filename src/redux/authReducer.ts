@@ -3,9 +3,9 @@ import {ActionsTypes} from "./reduxStore";
 const SET_USER_DATA = "SET_USER_DATA"
 
 export type AuthPageStateType = {
-    userId: number | null,
-    email: string | null,
-    login: string | null,
+    userId: number | null
+    email: string | null
+    login: string | null
     isAuth: boolean
 }
 

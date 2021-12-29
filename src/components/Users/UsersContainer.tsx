@@ -1,12 +1,22 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
-import {follow, setCurrentPage, setFetching, setTotalUsersCount, setUsers, unfollow, UserType} from "../../redux/usersReducer";
+import {
+    follow,
+    setCurrentPage,
+    setFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
+    UserType
+} from "../../redux/usersReducer";
 import {Dispatch} from "redux";
 import React from "react";
 import axios from "axios";
 import {UsersPresentationComponent} from "./UsersPresentationComponent";
 import loading from "../../assets/images/loading.gif"
 import {Preloader} from "../common/Preloader/Preloader";
+import {usersAPI} from "../../api/api";
+
 
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -14,24 +24,21 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.setFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
-            this.props.setFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-        })
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+                this.props.setFetching(false)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
+            })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.setFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
-            this.props.setFetching(false)
-            this.props.setUsers(response.data.items)
-        })
+
+        usersAPI.getUsers(pageNumber,this.props.pageSize).then(data => {
+                this.props.setFetching(false)
+                this.props.setUsers(data.items)
+            })
     }
 
     render() {
