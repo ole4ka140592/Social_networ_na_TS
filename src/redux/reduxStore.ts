@@ -10,9 +10,9 @@ export type ActionsTypes = AddPostType
     | UpdateNewPostTextType
     | UpdateNewMessageBodyAC
     | SendMessageAC
-    | UsersReducerType
     | ProfileReducerType
     | AuthReducerType
+|UsersReducerType
 
 
 export type AppStateType = ReturnType<typeof rootReducer>

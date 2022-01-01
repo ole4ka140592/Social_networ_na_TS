@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {
-    follow,
+    follow, followingInProgress,
     setCurrentPage,
     setFetching,
     setTotalUsersCount,
@@ -9,11 +9,8 @@ import {
     unfollow,
     UserType
 } from "../../redux/usersReducer";
-import {Dispatch} from "redux";
 import React from "react";
-import axios from "axios";
 import {UsersPresentationComponent} from "./UsersPresentationComponent";
-import loading from "../../assets/images/loading.gif"
 import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
 
@@ -51,6 +48,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
                                         unfollow={this.props.unfollow}
                                         follow={this.props.follow}
                                         users={this.props.users}
+                                        followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -63,7 +61,8 @@ type MapStateToPropsType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress: Array<number>
 }
 
 export type MapDispatchToPropsType = {
@@ -82,7 +81,8 @@ function mapStateToProps(state: AppStateType): MapStateToPropsType {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -110,6 +110,6 @@ function mapStateToProps(state: AppStateType): MapStateToPropsType {
 // }
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setFetching
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setFetching, followingInProgress
 })(UsersAPIComponent)
 

@@ -6,6 +6,9 @@ const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const SET_FETCHING = "SET_FETCHING"
+const FOLLOWING_IN_PROGRESS = "FOLLOWING_IN_PROGRESS"
+
+
 
 export type UserType = {
     id: number
@@ -22,21 +25,24 @@ export type UserType = {
     }
 }
 
-export type UsersPageStateType = {
-    users: Array<UserType>,
-    totalUsersCount: number,
-    pageSize: number,
-    currentPage: number,
-    isFetching: boolean
-}
+// export type UsersPageStateType = {
+//     users: Array<UserType>,
+//     totalUsersCount: number,
+//     pageSize: number,
+//     currentPage: number,
+//     isFetching: boolean,
+//     followingInProgress:
+// }
+
+export type UsersPageStateType = typeof usersPageState
 
 export let usersPageState = {
-    users: [],
+    users: [] as Array<UserType>,
     totalUsersCount: 0,
     pageSize: 5,
     currentPage: 2,
-    isFetching: false
-
+    isFetching: false,
+    followingInProgress: [] as Array<number>
 }
 
 // export type UsersPageStateType = typeof usersPageState
@@ -49,14 +55,14 @@ export const usersReducer = (state: UsersPageStateType = usersPageState,
         case FOLLOW: {
             return {
                 ...state,
-                users: state.users.map(m => m.id === action.userID ? {...m, followed: true} : m)
+                users: state.users.map(m => m.id === action.userId ? {...m, followed: true} : m)
             }
         }
 
         case UNFOLLOW: {
             return {
                 ...state,
-                users: state.users.map(m => m.id === action.userID ? {...m, followed: false} : m)
+                users: state.users.map(m => m.id === action.userId ? {...m, followed: false} : m)
             }
         }
 
@@ -76,69 +82,89 @@ export const usersReducer = (state: UsersPageStateType = usersPageState,
             return {...state, isFetching: action.isFetching}
         }
 
+        case FOLLOWING_IN_PROGRESS: {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
+        }
+
         default:
             return state
+        }
     }
-}
 
-export type UsersReducerType =
-    Follow
-    | Unfollow
-    | SetUsers
-    | SetCurrentPage
-    | SetTotalUsersCount
-    | SetFetching
+    export type UsersReducerType =
+        Follow
+        | Unfollow
+        | SetUsers
+        | SetCurrentPage
+        | SetTotalUsersCount
+        | SetFetching
+        | FollowingInProgress
 
-export type Follow = ReturnType<typeof follow>
+    export type Follow = ReturnType<typeof follow>
 
-export const follow = (userID: number) => {
-    return {
-        type: FOLLOW,
-        userID
-    } as const
-}
+    export const follow = (userId: number) => {
+        return {
+            type: FOLLOW,
+            userId
+        } as const
+    }
 
-export type Unfollow = ReturnType<typeof unfollow>
+    export type Unfollow = ReturnType<typeof unfollow>
 
-export const unfollow = (userID: number) => {
-    return {
-        type: UNFOLLOW,
-        userID
-    } as const
-}
+    export const unfollow = (userId: number) => {
+        return {
+            type: UNFOLLOW,
+            userId
+        } as const
+    }
 
-export type SetUsers = ReturnType<typeof setUsers>
+    export type SetUsers = ReturnType<typeof setUsers>
 
-export const setUsers = (users: Array<UserType>) => {
-    return {
-        type: SET_USERS,
-        users
-    } as const
-}
+    export const setUsers = (users: Array<UserType>) => {
+        return {
+            type: SET_USERS,
+            users: users
+        } as const
+    }
 
-export type SetCurrentPage = ReturnType<typeof setCurrentPage>
+    export type SetCurrentPage = ReturnType<typeof setCurrentPage>
 
-export const setCurrentPage = (currentPage: number) => {
-    return {
-        type: SET_CURRENT_PAGE,
-        currentPage
-    } as const
-}
+    export const setCurrentPage = (currentPage: number) => {
+        return {
+            type: SET_CURRENT_PAGE,
+            currentPage
+        } as const
+    }
 
-export type SetTotalUsersCount = ReturnType<typeof setTotalUsersCount>
+    export type SetTotalUsersCount = ReturnType<typeof setTotalUsersCount>
 
-export const setTotalUsersCount = (totalCount: number) => {
-    return {
-        type: SET_TOTAL_USERS_COUNT,
-        totalCount
-    } as const
-}
+    export const setTotalUsersCount = (totalCount: number) => {
+        return {
+            type: SET_TOTAL_USERS_COUNT,
+            totalCount
+        } as const
+    }
 
-export type SetFetching = ReturnType<typeof setFetching>
+    export type SetFetching = ReturnType<typeof setFetching>
 
-export const setFetching = (isFetching: boolean) => {
-    return {
-        type: SET_FETCHING,
-        isFetching: isFetching
-    } as const
-}
+    export const setFetching = (isFetching: boolean) => {
+        return {
+            type: SET_FETCHING,
+            isFetching: isFetching
+        } as const
+    }
+
+    export type FollowingInProgress = ReturnType<typeof followingInProgress>
+
+    export const followingInProgress = (isFetching: boolean, userId: number) => {
+        return {
+            type: FOLLOWING_IN_PROGRESS,
+            isFetching,
+            userId
+        } as const
+    }

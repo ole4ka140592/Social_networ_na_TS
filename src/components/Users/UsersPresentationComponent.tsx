@@ -1,7 +1,7 @@
 import classes from './Users.module.css'
 import userPhoto from "../../assets/images/user.png"
-import React from "react";
-import {UsersPageStateType, UserType} from "../../redux/usersReducer";
+import React, {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
+import {UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 
@@ -14,6 +14,7 @@ type UsersPresentationComponentPropsType = {
     unfollow: (userID: number) => void
     follow: (userID: number) => void
     users: Array<UserType>
+    followingInProgress: Array<number>
 }
 
 export const UsersPresentationComponent = (props: UsersPresentationComponentPropsType) => {
@@ -44,7 +45,8 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                             </div>
                             <div>
                                 {m.followed
-                                    ? <button onClick={() => {
+                                    ? <button dasabled={props.followingInProgress.some(id=> id === m.id)} onClick={( ) => {
+                                        props.followingInProgress(true, m.id)
                                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
                                              {withCredentials: true,
                                              headers: {"API-KEY": "3ffd8bee-6a2a-4b2d-9367-b8070697f4c5"}
@@ -53,10 +55,12 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                                                 if (response.data.resultCode === 0) {
                                                     props.unfollow(m.id)
                                                 }
+                                                props.followingInProgress(false, m.id)
                                             })
 
                                     }}>Follow</button>
-                                    : <button onClick={() => {
+                                    : <button dasabled={props.followingInProgress.some(id=> id === m.id)} onClick={() => {
+                                        props.followingInProgress(true, m.id)
                                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
                                             {}, {withCredentials: true,
                                                 headers: {"API-KEY": "3ffd8bee-6a2a-4b2d-9367-b8070697f4c5"}
@@ -65,6 +69,7 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                                                 if (response.data.resultCode === 0) {
                                                     props.follow(m.id)
                                                 }
+                                                props.followingInProgress(false, m.id)
                                             })
                                         
 
