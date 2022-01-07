@@ -1,6 +1,6 @@
 import classes from './Users.module.css'
 import userPhoto from "../../assets/images/user.png"
-import React, {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
+import React from "react";
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
@@ -19,7 +19,6 @@ type UsersPresentationComponentPropsType = {
 }
 
 export const UsersPresentationComponent = (props: UsersPresentationComponentPropsType) => {
-
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = []
