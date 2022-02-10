@@ -1,6 +1,6 @@
 import classes from './Users.module.css'
 import userPhoto from "../../assets/images/user.png"
-import React from "react";
+import React  from "react";
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
@@ -16,6 +16,7 @@ type UsersPresentationComponentPropsType = {
     users: Array<UserType>
     followingInProgress: Array<number>
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+
 }
 
 export const UsersPresentationComponent = (props: UsersPresentationComponentPropsType) => {

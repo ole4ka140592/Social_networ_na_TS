@@ -1,9 +1,10 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {AddPostType, profileReducer, ProfileReducerType, UpdateNewPostTextType} from "./profileReducer";
 import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
-import {sidebarReducer, SidebarType} from "./sidebarReducer";
+import {sidebarReducer} from "./sidebarReducer";
 import {usersReducer, UsersReducerType} from "./usersReducer";
 import {authReducer, AuthReducerType} from "./authReducer";
+import thunk from "redux-thunk";
 
 
 export type ActionsTypes = AddPostType
@@ -25,7 +26,7 @@ let rootReducer = combineReducers({
     auth: authReducer
 })
 
-export let store = createStore(rootReducer)
+export let store = createStore(rootReducer, applyMiddleware(thunk))
 
 // @ts-ignore
 window.store = store

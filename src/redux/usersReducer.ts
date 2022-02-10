@@ -1,4 +1,6 @@
 import {ActionsTypes} from "./reduxStore";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -7,7 +9,6 @@ const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const SET_FETCHING = "SET_FETCHING"
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
-
 
 
 export type UserType = {
@@ -93,78 +94,101 @@ export const usersReducer = (state: UsersPageStateType = usersPageState,
 
         default:
             return state
-        }
     }
+}
 
-    export type UsersReducerType =
-        Follow
-        | Unfollow
-        | SetUsers
-        | SetCurrentPage
-        | SetTotalUsersCount
-        | SetFetching
-        | FollowingInProgress
+export type UsersReducerType =
+    Follow
+    | Unfollow
+    | SetUsers
+    | SetCurrentPage
+    | SetTotalUsersCount
+    | SetFetching
+    | FollowingInProgress
 
-    export type Follow = ReturnType<typeof follow>
+export type Follow = ReturnType<typeof follow>
 
-    export const follow = (userId: number) => {
-        return {
-            type: FOLLOW,
-            userId
-        } as const
+export const follow = (userId: number) => {
+    return {
+        type: FOLLOW,
+        userId
+    } as const
+}
+
+export type Unfollow = ReturnType<typeof unfollow>
+
+export const unfollow = (userId: number) => {
+    return {
+        type: UNFOLLOW,
+        userId
+    } as const
+}
+
+export type SetUsers = ReturnType<typeof setUsers>
+
+export const setUsers = (users: Array<UserType>) => {
+    return {
+        type: SET_USERS,
+        users: users
+    } as const
+}
+
+export type SetCurrentPage = ReturnType<typeof setCurrentPage>
+
+export const setCurrentPage = (currentPage: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage
+    } as const
+}
+
+export type SetTotalUsersCount = ReturnType<typeof setTotalUsersCount>
+
+export const setTotalUsersCount = (totalCount: number) => {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        totalCount
+    } as const
+}
+
+export type SetFetching = ReturnType<typeof setFetching>
+
+export const setFetching = (isFetching: boolean) => {
+    return {
+        type: SET_FETCHING,
+        isFetching: isFetching
+    } as const
+}
+
+export type FollowingInProgress = ReturnType<typeof toggleFollowingProgress>
+
+export const toggleFollowingProgress = (isFetching: boolean, userId: number) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
+        isFetching,
+        userId
+    } as const
+}
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFetching(true))
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
     }
+}
 
-    export type Unfollow = ReturnType<typeof unfollow>
-
-    export const unfollow = (userId: number) => {
-        return {
-            type: UNFOLLOW,
-            userId
-        } as const
+export const getUsersPageChangedThunkCreator = (pageNumber: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setCurrentPage(pageNumber))
+        dispatch(setFetching(true))
+        usersAPI.getUsers(pageNumber, pageSize).then(data => {
+            dispatch(setFetching(false))
+            dispatch(setUsers(data.items))
+        })
     }
+}
 
-    export type SetUsers = ReturnType<typeof setUsers>
-
-    export const setUsers = (users: Array<UserType>) => {
-        return {
-            type: SET_USERS,
-            users: users
-        } as const
-    }
-
-    export type SetCurrentPage = ReturnType<typeof setCurrentPage>
-
-    export const setCurrentPage = (currentPage: number) => {
-        return {
-            type: SET_CURRENT_PAGE,
-            currentPage
-        } as const
-    }
-
-    export type SetTotalUsersCount = ReturnType<typeof setTotalUsersCount>
-
-    export const setTotalUsersCount = (totalCount: number) => {
-        return {
-            type: SET_TOTAL_USERS_COUNT,
-            totalCount
-        } as const
-    }
-
-    export type SetFetching = ReturnType<typeof setFetching>
-
-    export const setFetching = (isFetching: boolean) => {
-        return {
-            type: SET_FETCHING,
-            isFetching: isFetching
-        } as const
-    }
-
-    export type FollowingInProgress = ReturnType<typeof toggleFollowingProgress>
-
-    export const toggleFollowingProgress = (isFetching: boolean, userId: number) => {
-        return {
-            type: TOGGLE_IS_FOLLOWING_PROGRESS,
-            isFetching,
-            userId
-        } as const
-    }
