@@ -192,3 +192,40 @@ export const getUsersPageChangedThunkCreator = (pageNumber: number, pageSize: nu
     }
 }
 
+export const followThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
+        //     {
+        //         withCredentials: true,
+        //         headers: {"API-KEY": "3ffd8bee-6a2a-4b2d-9367-b8070697f4c5"}
+        //     })
+        usersAPI.unfollow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(unfollow(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId))
+            })
+    }
+}
+
+export const unFollowThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
+        //     {}, {
+        //         withCredentials: true,
+        //         headers: {"API-KEY": "3ffd8bee-6a2a-4b2d-9367-b8070697f4c5"}
+        //     })
+        usersAPI.follow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(follow(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId))
+            })
+    }
+}
+
+
