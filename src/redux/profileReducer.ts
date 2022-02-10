@@ -1,4 +1,7 @@
 import {ActionsTypes} from "./reduxStore";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import {follow, toggleFollowingProgress} from "./usersReducer";
 
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 
@@ -20,7 +23,7 @@ type ContactsType = {
 }
 
 export type ProfileType = {
-    userId: string,
+    userId: number,
     aboutMe: null | string,
     contacts: ContactsType,
     lookingForAJob: boolean,
@@ -103,4 +106,14 @@ export const setUserProfile = (profile: ProfileType) => {
         type: SET_USER_PROFILE,
         profile
     } as const
+}
+
+
+export const getUserProfileThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
 }

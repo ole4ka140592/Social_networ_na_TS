@@ -1,4 +1,7 @@
 import {ActionsTypes} from "./reduxStore";
+import {Dispatch} from "redux";
+import {authAPI, usersAPI} from "../api/api";
+import {follow, toggleFollowingProgress} from "./usersReducer";
 
 const SET_USER_DATA = "SET_USER_DATA"
 
@@ -48,6 +51,20 @@ export const setAuthUserData = (email: string | null, userId: number | null, log
             login
         }
     } as const
+}
+
+export const getAuthUserDataThunkCreator = () => {
+    return (dispatch: Dispatch) => {
+        authAPI.me()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setAuthUserData(
+                        response.data.data.email,
+                        response.data.data.id,
+                        response.data.data.login));
+                }
+            })
+    }
 }
 
 
