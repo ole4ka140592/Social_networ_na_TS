@@ -1,23 +1,18 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
-import {
-    follow, followThunkCreator, getUsersPageChangedThunkCreator, getUsersThunkCreator,
-    setCurrentPage,
-    setFetching,
-    setTotalUsersCount,
-    setUsers, toggleFollowingProgress,
+import {follow, followThunkCreator, getUsersPageChangedThunkCreator, getUsersThunkCreator,
+    toggleFollowingProgress,
     unfollow, unFollowThunkCreator,
     UserType
 } from "../../redux/usersReducer";
 import React from "react";
 import {UsersPresentationComponent} from "./UsersPresentationComponent";
 import {Preloader} from "../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
-
-class UsersAPIComponent extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -97,30 +92,9 @@ function mapStateToProps(state: AppStateType): MapStateToPropsType {
     }
 }
 
-// function mapDispatchToProps(dispatch: Dispatch): MapDispatchToPropsType {
-//     return {
-//         follow: (userID: number) => {
-//             dispatch(followAC(userID))
-//         },
-//         unfollow: (userID: number) => {
-//             dispatch(unfollowAC(userID))
-//         },
-//         setUsers: (users: Array<UserType>) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (pageNumber: number) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUsersCountAC(totalCount))
-//         },
-//         setFetching: (isFetching: boolean) => {
-//             dispatch(setFetchingAC(isFetching))
-//         }
-//     }
-// }
 
-export const UsersContainer = connect(mapStateToProps, {
+
+export default withAuthRedirect(connect(mapStateToProps, {
     follow, unfollow,
     // setUsers, setCurrentPage,
     // setTotalUsersCount, setFetching,
@@ -128,6 +102,6 @@ export const UsersContainer = connect(mapStateToProps, {
     getUsers: getUsersThunkCreator,
     getUsersPageChangedThunkCreator,
     followThunkCreator, unFollowThunkCreator
+})(UsersContainer))
 
-})(UsersAPIComponent)
-
+// let AuthRedirectComponent = withAuthRedirect(UsersContainer)
