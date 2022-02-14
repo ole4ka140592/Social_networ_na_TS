@@ -9,6 +9,7 @@ import React from "react";
 import {UsersPresentationComponent} from "./UsersPresentationComponent";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -93,15 +94,27 @@ function mapStateToProps(state: AppStateType): MapStateToPropsType {
 }
 
 
-
-export default withAuthRedirect(connect(mapStateToProps, {
-    follow, unfollow,
-    // setUsers, setCurrentPage,
-    // setTotalUsersCount, setFetching,
-    toggleFollowingProgress,
-    getUsers: getUsersThunkCreator,
-    getUsersPageChangedThunkCreator,
-    followThunkCreator, unFollowThunkCreator
-})(UsersContainer))
+// export default withAuthRedirect(connect(mapStateToProps, {
+//     follow, unfollow,
+//     // setUsers, setCurrentPage,
+//     // setTotalUsersCount, setFetching,
+//     toggleFollowingProgress,
+//     getUsers: getUsersThunkCreator,
+//     getUsersPageChangedThunkCreator,
+//     followThunkCreator, unFollowThunkCreator
+// })(UsersContainer))
 
 // let AuthRedirectComponent = withAuthRedirect(UsersContainer)
+
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        follow, unfollow,
+        // setUsers, setCurrentPage,
+        // setTotalUsersCount, setFetching,
+        toggleFollowingProgress,
+        getUsers: getUsersThunkCreator,
+        getUsersPageChangedThunkCreator,
+        followThunkCreator, unFollowThunkCreator
+    })
+)(UsersContainer)

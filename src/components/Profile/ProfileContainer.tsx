@@ -5,6 +5,8 @@ import {getUserProfileThunkCreator, ProfileType} from "../../redux/profileReduce
 import {AppStateType} from "../../redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
+import {Dialogs} from "../Dialogs/Dialogs";
 
 
 export type MapStateToPropsType = {
@@ -13,7 +15,7 @@ export type MapStateToPropsType = {
 
 export type MapDispatchToPropsType = {
     // setUserProfile: (profile: ProfileType) => void
-    getUserProfileThunkCreator: (userId: number)=> void
+    getUserProfileThunkCreator: (userId: number) => void
 }
 
 type MapStateAndDispatchToPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -57,8 +59,11 @@ function mapStateToProps(state: AppStateType): MapStateToPropsType {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
+// export default connect(mapStateToProps, {getUserProfileThunkCreator})(WithUrlDataContainerComponent)
 
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-
-export default connect(mapStateToProps, {getUserProfileThunkCreator})(WithUrlDataContainerComponent)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfileThunkCreator}),
+    withRouter,
+    withAuthRedirect)(ProfileContainer)
