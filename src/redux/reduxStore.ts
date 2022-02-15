@@ -5,6 +5,7 @@ import {sidebarReducer} from "./sidebarReducer";
 import {usersReducer, UsersReducerType} from "./usersReducer";
 import {authReducer, AuthReducerType} from "./authReducer";
 import thunk from "redux-thunk";
+import {reducer as formReducer} from "redux-form";
 
 
 export type ActionsTypes = AddPostType
@@ -23,7 +24,8 @@ let rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export let store = createStore(rootReducer, applyMiddleware(thunk))
