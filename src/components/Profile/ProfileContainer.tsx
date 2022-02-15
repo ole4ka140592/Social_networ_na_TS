@@ -66,4 +66,5 @@ function mapStateToProps(state: AppStateType): MapStateToPropsType {
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfileThunkCreator}),
     withRouter,
-    withAuthRedirect)(ProfileContainer)
+    withAuthRedirect
+)(ProfileContainer)
