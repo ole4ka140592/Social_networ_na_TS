@@ -1,31 +1,33 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfileThunkCreator, ProfileType} from "../../redux/profileReducer";
+import {
+    getUserProfileThunkCreator,
+    getUserStatusThunkCreator,
+    ProfileType,
+    updateUserStatusThunkCreator
+} from "../../redux/profileReducer";
 import {AppStateType} from "../../redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {Dialogs} from "../Dialogs/Dialogs";
 
 
 export type MapStateToPropsType = {
     profile: ProfileType
+    status: string
 }
-
 export type MapDispatchToPropsType = {
     // setUserProfile: (profile: ProfileType) => void
     getUserProfileThunkCreator: (userId: number) => void
+    getUserStatusThunkCreator: (userId: number) => void
+    updateUserStatusThunkCreator: (status: string) => void
 }
-
 type MapStateAndDispatchToPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 type MathParamsType = {
     userId: string
 }
-
 type AllMathParamsType = RouteComponentProps<MathParamsType>
-
 type ProfileContainerType = MapStateAndDispatchToPropsType & AllMathParamsType
 
 
@@ -33,6 +35,9 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
 
     componentDidMount() {
         let userId = Number(this.props.match.params.userId)
+        if (!userId) {
+            userId =21312
+        }
         // if (!userId) {
         //     userId = 2
         // }
@@ -41,13 +46,16 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         //     .then(response => {
         //         this.props.setUserProfile(response.data)
         //     })
+        this.props.getUserStatusThunkCreator(userId)
     }
 
     render() {
-
         return (
             <div>
-                <Profile profile={this.props.profile}/>
+                <Profile
+                    profile={this.props.profile}
+                    status={this.props.status}
+                    updateStatus={this.props.updateUserStatusThunkCreator}/>
             </div>
         )
     }
@@ -55,16 +63,19 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
 
 function mapStateToProps(state: AppStateType): MapStateToPropsType {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 }
-
 // let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 // let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 // export default connect(mapStateToProps, {getUserProfileThunkCreator})(WithUrlDataContainerComponent)
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfileThunkCreator}),
+    connect(mapStateToProps, {
+        getUserProfileThunkCreator,
+        getUserStatusThunkCreator, updateUserStatusThunkCreator
+    }),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

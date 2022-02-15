@@ -1,9 +1,11 @@
 import {ActionsTypes} from "./reduxStore";
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 import {follow, toggleFollowingProgress} from "./usersReducer";
 
 const SET_USER_PROFILE = "SET_USER_PROFILE"
+const SET_STATUS = "SET_STATUS"
+const UPDATE_STATUS = "UPDATE_STATUS"
 
 export type PostsType = {
     id: number
@@ -41,7 +43,8 @@ let profilePageState = {
         {id: 2, message: 'It is my first post', like: 20}
     ] as Array<PostsType>,
     newPostText: '',
-    profile: {} as ProfileType
+    profile: {} as ProfileType,
+    status: ''
 }
 
 export type ProfilePageStateType = typeof profilePageState
@@ -56,7 +59,8 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
                 message: state.newPostText,
                 like: 0
             }
-            let stateCopy = {...state,
+            let stateCopy = {
+                ...state,
                 posts: [...state.posts, newPost],
                 newPostText: ""
             }
@@ -65,7 +69,8 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
         }
 
         case "UPDATE-NEW-POST-TEXT": {
-            let stateCopy = {...state,
+            let stateCopy = {
+                ...state,
                 newPostText: action.newText
             }
 
@@ -76,11 +81,40 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
             return {...state, profile: action.profile}
         }
 
-        default: return state
+        case "SET_STATUS": {
+            return {...state, status: action.status}
+        }
+
+        // case "UPDATE_STATUS": {
+        //     return {...state, status: action.status}
+        // }
+
+        default:
+            return state
     }
 }
 
 export type ProfileReducerType = AddPostType | UpdateNewPostTextType | SetUserProfileType
+    | SetStatusType
+
+export type SetStatusType = ReturnType<typeof setStatus>
+
+export const setStatus = (status: string) => {
+    return {
+        type: SET_STATUS,
+        status
+    } as const
+}
+
+// export type UpdateStatusType = ReturnType<typeof updateStatus>
+//
+// export const updateStatus = (status: string) => {
+//     return {
+//         type: UPDATE_STATUS,
+//         status
+//     } as const
+// }
+
 
 export type AddPostType = ReturnType<typeof addPost>
 
@@ -116,4 +150,20 @@ export const getUserProfileThunkCreator = (userId: number) => {
                 dispatch(setUserProfile(response.data))
             })
     }
+}
+
+export const getUserStatusThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userId)
+        .then((res) => {
+            dispatch(setStatus(res.data))
+        })
+}
+
+export const updateUserStatusThunkCreator = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatus(status)
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        })
 }

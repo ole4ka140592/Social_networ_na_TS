@@ -6,6 +6,8 @@ import {ProfileStatus} from "../ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: ProfileType
+    status: string
+    updateStatus: (status: string)=> void
 }
 
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -27,7 +29,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
                     {props.profile.aboutMe}
 
-                <ProfileStatus status={"haaaaaaaaaaaaaaaa"}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
 
 
             </div>
