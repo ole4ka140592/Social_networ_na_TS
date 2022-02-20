@@ -1,4 +1,4 @@
-import {AddPostType, ProfileType, UpdateNewPostTextType} from "./profileReducer";
+import {AddPostType, ProfileType} from "./profileReducer";
 import {SendMessageAC} from "./dialogsReducer";
 
 
@@ -41,7 +41,7 @@ type StoreType = {
 }
 
 type ActionsTypes = AddPostType
-    | UpdateNewPostTextType
+    // | UpdateNewPostTextType
     // | UpdateNewMessageBodyAC
     | SendMessageAC
 

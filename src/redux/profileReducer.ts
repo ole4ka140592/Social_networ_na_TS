@@ -42,7 +42,7 @@ let profilePageState = {
         {id: 1, message: 'Hi, how are you?', like: 15},
         {id: 2, message: 'It is my first post', like: 20}
     ] as Array<PostsType>,
-    newPostText: '',
+    // newPostText: '',
     profile: {} as ProfileType,
     status: ''
 }
@@ -56,7 +56,7 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
         case "ADD-POST": {
             const newPost: PostsType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.newPostText,
                 like: 0
             }
             let stateCopy = {
@@ -68,14 +68,14 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
             return stateCopy
         }
 
-        case "UPDATE-NEW-POST-TEXT": {
-            let stateCopy = {
-                ...state,
-                newPostText: action.newText
-            }
-
-            return stateCopy
-        }
+        // case "UPDATE-NEW-POST-TEXT": {
+        //     let stateCopy = {
+        //         ...state,
+        //         newPostText: action.newText
+        //     }
+        //
+        //     return stateCopy
+        // }
 
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
@@ -94,7 +94,9 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
     }
 }
 
-export type ProfileReducerType = AddPostType | UpdateNewPostTextType | SetUserProfileType
+export type ProfileReducerType = AddPostType
+    // | UpdateNewPostTextType
+    | SetUserProfileType
     | SetStatusType
 
 export type SetStatusType = ReturnType<typeof setStatus>
@@ -116,22 +118,23 @@ export const setStatus = (status: string) => {
 // }
 
 
-export type AddPostType = ReturnType<typeof addPost>
+export type AddPostType = ReturnType<typeof addPostAC>
 
-export const addPost = () => {
+export const addPostAC = (newPostText: string) => {
     return {
         type: "ADD-POST",
+        newPostText
     } as const
 }
 
-export type UpdateNewPostTextType = ReturnType<typeof updateNewPostText>
-
-export const updateNewPostText = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newText
-    } as const
-}
+// export type UpdateNewPostTextType = ReturnType<typeof updateNewPostText>
+//
+// export const updateNewPostText = (newText: string) => {
+//     return {
+//         type: "UPDATE-NEW-POST-TEXT",
+//         newText
+//     } as const
+// }
 
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
 

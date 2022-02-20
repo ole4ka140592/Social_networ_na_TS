@@ -35,7 +35,7 @@ export const Dialogs = (props: PropsDialogsType) => {
     //     props.updateNewMessageBody(body)
     // }
 
-    const addNewMessage = (values: FormDataType) => {
+    const addNewMessage = (values: FormDataAddMessageType) => {
         props.sendMessage(values.newMassageBody)
     }
 
@@ -58,11 +58,11 @@ export const Dialogs = (props: PropsDialogsType) => {
 }
 
 
-type FormDataType = {
+type FormDataAddMessageType = {
     newMassageBody: string
 }
 
-const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const AddMessageForm: React.FC<InjectedFormProps<FormDataAddMessageType>> = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
@@ -79,4 +79,4 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     )
 }
 
-const AddMessageFormRedux = reduxForm<FormDataType>({form: "dialogAddMessageForm"})(AddMessageForm)
+const AddMessageFormRedux = reduxForm<FormDataAddMessageType>({form: "dialogAddMessageForm"})(AddMessageForm)
