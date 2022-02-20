@@ -1,6 +1,6 @@
-import {AddPostType, profileReducer, ProfileType, UpdateNewPostTextType} from "./profileReducer";
-import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
-import {sidebarReducer} from "./sidebarReducer";
+import {AddPostType, ProfileType, UpdateNewPostTextType} from "./profileReducer";
+import {SendMessageAC} from "./dialogsReducer";
+
 
 type PostsType = {
     id: number
@@ -42,7 +42,7 @@ type StoreType = {
 
 type ActionsTypes = AddPostType
     | UpdateNewPostTextType
-    | UpdateNewMessageBodyAC
+    // | UpdateNewMessageBodyAC
     | SendMessageAC
 
 let store: StoreType = {

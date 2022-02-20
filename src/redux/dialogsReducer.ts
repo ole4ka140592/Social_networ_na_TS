@@ -30,7 +30,7 @@ export let dialogsPageState = {
         {id: 4, message: 'Yoy'},
         {id: 5, message: 'Yoy'},
     ] as Array<MessagesType>,
-    newMessageBody: ""
+    // newMessageBody: ""
 }
 
 export type DialogsPageStateType = typeof dialogsPageState
@@ -41,19 +41,19 @@ export const dialogsReducer = (state: DialogsPageStateType = dialogsPageState,
 
 
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY": {
-            let stateCopy = {
-                ...state,
-                newMessageBody: action.body
-            }
-            return stateCopy
-        }
+        // case "UPDATE-NEW-MESSAGE-BODY": {
+        //     let stateCopy = {
+        //         ...state,
+        //         newMessageBody: action.body
+        //     }
+        //     return stateCopy
+        // }
 
         case "SEND-MESSAGE": {
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             let stateCopy = {
                 ...state,
-                newMessageBody : "",
+                // newMessageBody : "",
                 messages: [...state.messages, {id: 6, message: body}]
             }
 
@@ -65,21 +65,23 @@ export const dialogsReducer = (state: DialogsPageStateType = dialogsPageState,
     }
 }
 
-export type DialogsReducerType = UpdateNewMessageBodyAC | SendMessageAC
+export type DialogsReducerType = SendMessageAC
+    // | UpdateNewMessageBodyAC
 
-export type UpdateNewMessageBodyAC = ReturnType<typeof updateNewMessageBodyAC>
-
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body
-    } as const
-}
+// export type UpdateNewMessageBodyAC = ReturnType<typeof updateNewMessageBodyAC>
+//
+// export const updateNewMessageBodyAC = (body: string) => {
+//     return {
+//         type: "UPDATE-NEW-MESSAGE-BODY",
+//         body
+//     } as const
+// }
 
 export type SendMessageAC = ReturnType<typeof sendMessageAC>
 
-export const sendMessageAC = () => {
+export const sendMessageAC = (newMessageBody: string) => {
     return {
-        type: "SEND-MESSAGE"
+        type: "SEND-MESSAGE",
+        newMessageBody
     } as const
 }

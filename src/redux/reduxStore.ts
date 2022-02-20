@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {AddPostType, profileReducer, ProfileReducerType, UpdateNewPostTextType} from "./profileReducer";
-import {dialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
+import {dialogsReducer, SendMessageAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {usersReducer, UsersReducerType} from "./usersReducer";
 import {authReducer, AuthReducerType} from "./authReducer";
@@ -10,7 +10,6 @@ import {reducer as formReducer} from "redux-form";
 
 export type ActionsTypes = AddPostType
     | UpdateNewPostTextType
-    | UpdateNewMessageBodyAC
     | SendMessageAC
     | ProfileReducerType
     | AuthReducerType
