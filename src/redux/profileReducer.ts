@@ -1,11 +1,10 @@
 import {ActionsTypes} from "./reduxStore";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
-import {follow, toggleFollowingProgress} from "./usersReducer";
+
 
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
-const UPDATE_STATUS = "UPDATE_STATUS"
 
 export type PostsType = {
     id: number
@@ -52,7 +51,6 @@ export type ProfilePageStateType = typeof profilePageState
 export const profileReducer = (state: ProfilePageStateType = profilePageState,
                                action: ActionsTypes): ProfilePageStateType => {
     switch (action.type) {
-
         case "ADD-POST": {
             const newPost: PostsType = {
                 id: new Date().getTime(),
@@ -62,20 +60,9 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
             let stateCopy = {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
             }
-
             return stateCopy
         }
-
-        // case "UPDATE-NEW-POST-TEXT": {
-        //     let stateCopy = {
-        //         ...state,
-        //         newPostText: action.newText
-        //     }
-        //
-        //     return stateCopy
-        // }
 
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
@@ -85,22 +72,14 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
             return {...state, status: action.status}
         }
 
-        // case "UPDATE_STATUS": {
-        //     return {...state, status: action.status}
-        // }
-
         default:
             return state
     }
 }
 
-export type ProfileReducerType = AddPostType
-    // | UpdateNewPostTextType
-    | SetUserProfileType
-    | SetStatusType
+export type ProfileReducerType = AddPostType | SetUserProfileType | SetStatusType
 
 export type SetStatusType = ReturnType<typeof setStatus>
-
 export const setStatus = (status: string) => {
     return {
         type: SET_STATUS,
@@ -108,18 +87,7 @@ export const setStatus = (status: string) => {
     } as const
 }
 
-// export type UpdateStatusType = ReturnType<typeof updateStatus>
-//
-// export const updateStatus = (status: string) => {
-//     return {
-//         type: UPDATE_STATUS,
-//         status
-//     } as const
-// }
-
-
 export type AddPostType = ReturnType<typeof addPostAC>
-
 export const addPostAC = (newPostText: string) => {
     return {
         type: "ADD-POST",
@@ -127,24 +95,13 @@ export const addPostAC = (newPostText: string) => {
     } as const
 }
 
-// export type UpdateNewPostTextType = ReturnType<typeof updateNewPostText>
-//
-// export const updateNewPostText = (newText: string) => {
-//     return {
-//         type: "UPDATE-NEW-POST-TEXT",
-//         newText
-//     } as const
-// }
-
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
-
 export const setUserProfile = (profile: ProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile
     } as const
 }
-
 
 export const getUserProfileThunkCreator = (userId: number) => {
     return (dispatch: Dispatch) => {

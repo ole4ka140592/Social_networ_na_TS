@@ -6,51 +6,26 @@ import {AppStateType} from "../../../redux/reduxStore";
 import {Dispatch} from "redux";
 
 
-// export const MyPostsContainer = (props: MyPostsContainerType) => {
-//
-//     let state = props.store.getState()
-//
-//     let addPost = () => {
-//         props.store.dispatch(addPostAC(state.profilePage.newPostText))
-//         props.store.dispatch(updateNewPostTextAC(""))
-//     }
-//
-//     let onPostChange = (text: string) => {
-//         props.store.dispatch(updateNewPostTextAC(text))
-//     }
-//
-// }
-
 type MapStateToProps = {
-    posts: Array<PostsType>,
-    // newPostText: string
+    posts: Array<PostsType>
 }
 
 type MapDispatchToPropsType = {
-    // updateNewPostText: (text: string) => void
     addPost: (newPostText: string) => void
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         posts: state.profilePage.posts,
-        // newPostText: state.profilePage.newPostText
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        // updateNewPostText: (text: string) => {
-        //     dispatch(updateNewPostTextAC(text))
-        // },
         addPost: (newPostText: string) => {
             dispatch(addPostAC(newPostText))
-            // dispatch(updateNewPostTextAC(""))
         }
-
     }
 }
 
-
-export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps
-   )(MyPosts)
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

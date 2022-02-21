@@ -1,7 +1,7 @@
 import {ActionsTypes} from "./reduxStore";
 import {Dispatch} from "redux";
-import {authAPI, usersAPI} from "../api/api";
-import {follow, toggleFollowingProgress} from "./usersReducer";
+import {authAPI} from "../api/api";
+
 
 const SET_USER_DATA = "SET_USER_DATA"
 
@@ -19,12 +19,10 @@ export let authPageState = {
     isAuth: false
 }
 
-export const authReducer = (state: AuthPageStateType = authPageState,
-                            action: ActionsTypes): AuthPageStateType => {
+export const authReducer = (state: AuthPageStateType = authPageState, action: ActionsTypes)
+    : AuthPageStateType => {
 
     switch (action.type) {
-
-
         case SET_USER_DATA: {
             return {
                 ...state,
@@ -39,7 +37,6 @@ export const authReducer = (state: AuthPageStateType = authPageState,
 }
 
 export type AuthReducerType = SetUserData
-
 export type SetUserData = ReturnType<typeof setAuthUserData>
 
 export const setAuthUserData = (email: string | null, userId: number | null, login: string | null) => {

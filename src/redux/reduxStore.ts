@@ -8,13 +8,8 @@ import thunk from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
 
 
-export type ActionsTypes =
-    AddPostType
-    // | UpdateNewPostTextType
-    | SendMessageAC
-    | ProfileReducerType
-    | AuthReducerType
-|UsersReducerType
+export type ActionsTypes = AddPostType | SendMessageAC | ProfileReducerType | AuthReducerType
+    |UsersReducerType
 
 
 export type AppStateType = ReturnType<typeof rootReducer>

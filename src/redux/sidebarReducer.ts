@@ -9,7 +9,8 @@ type InitialStateType = typeof initialState
 
 export type SidebarReducerType = ReturnType<typeof sidebarReducer>
 
-export const sidebarReducer=(state: InitialStateType = initialState, action: ActionsTypes): InitialStateType=> {
+export const sidebarReducer=(state: InitialStateType = initialState, action: ActionsTypes)
+    : InitialStateType=> {
 
     switch(action.type) {
 
