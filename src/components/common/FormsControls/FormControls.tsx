@@ -16,3 +16,17 @@ export const Textarea: React.FC<WrappedFieldProps> = ({input, meta, ...props}) =
         </div>
     )
 }
+
+export const Input: React.FC<WrappedFieldProps> = ({input, meta, ...props}) => {
+
+    const hasError = meta.touched && meta.error
+
+    return (
+        <div className={classes.formControl + " " + (hasError ? classes.error : "")}>
+            <div>
+                <input {...input} {...props}/>
+            </div>
+            {hasError && <span>{meta.error}</span>}
+        </div>
+    )
+}
