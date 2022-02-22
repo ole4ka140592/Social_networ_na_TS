@@ -13,14 +13,18 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
-export type MapStateToPropsType = {
-    profile: ProfileType
-    status: string
-}
+// export type MapStateToPropsType = {
+//     profile: ProfileType
+//     status: string
+//     authorizedUserId: number | null
+//     isAuth: boolean
+// }
+
+export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+
 export type MapDispatchToPropsType = {
-    // setUserProfile: (profile: ProfileType) => void
-    getUserProfileThunkCreator: (userId: number) => void
-    getUserStatusThunkCreator: (userId: number) => void
+    getUserProfileThunkCreator: (userId: number | null) => void
+    getUserStatusThunkCreator: (userId: number | null) => void
     updateUserStatusThunkCreator: (status: string) => void
 }
 type MapStateAndDispatchToPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -36,16 +40,12 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     componentDidMount() {
         let userId = Number(this.props.match.params.userId)
         if (!userId) {
-            userId =21312
+            userId = Number(this.props.authorizedUserId)
+            if (!userId) {
+
+            }
         }
-        // if (!userId) {
-        //     userId = 2
-        // }
         this.props.getUserProfileThunkCreator(userId)
-        // usersAPI.getProfile(userId)
-        //     .then(response => {
-        //         this.props.setUserProfile(response.data)
-        //     })
         this.props.getUserStatusThunkCreator(userId)
     }
 
@@ -61,15 +61,14 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     }
 }
 
-function mapStateToProps(state: AppStateType): MapStateToPropsType {
+function mapStateToProps(state: AppStateType) {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.userId,
+        isAuth: state.auth.isAuth
     }
 }
-// let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-// export default connect(mapStateToProps, {getUserProfileThunkCreator})(WithUrlDataContainerComponent)
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {

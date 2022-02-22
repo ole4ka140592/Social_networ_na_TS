@@ -24,7 +24,7 @@ type ContactsType = {
 }
 
 export type ProfileType = {
-    userId: number,
+    userId: number | null,
     aboutMe: null | string,
     contacts: ContactsType,
     lookingForAJob: boolean,
