@@ -31,7 +31,7 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                 <span>{pages.map(m => <span className={props.currentPage === m ? classes.selectedPage : ""}
                                             onClick={(e) => {
                                                 props.onPageChanged(m)
-                                            }}>{m}</span>)}
+                                            }} key={m}>{m}</span>)}
                 </span>
             {
                 props.users.map(m =>
