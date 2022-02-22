@@ -1,4 +1,3 @@
-import {ActionsTypes} from "./reduxStore";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
@@ -54,7 +53,6 @@ export const setAuthUserData = (userId: number | null, login: string | null,
 }
 
 export const getAuthUserDataThunkCreator = () => (dispatch: Dispatch) => {
-    debugger
     authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
