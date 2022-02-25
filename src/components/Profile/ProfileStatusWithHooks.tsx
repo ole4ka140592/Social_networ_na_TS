@@ -1,0 +1,56 @@
+import {ChangeEvent, useState} from "react";
+
+
+type ProfileStatusPropsType = {
+    status: string
+    updateStatus: (status: string) => void
+}
+
+
+export const ProfileStatusWithHooks = (props: ProfileStatusPropsType) =>  {
+
+    let [editMode, setEditMode] = useState(false)
+
+    let [status, setStatus] = useState(props.status)
+
+     const editModeTrue = () => {
+         setEditMode(true)
+    }
+
+    const editModeFalse = () => {
+        setEditMode(false)
+        props.updateStatus(status)
+    }
+
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>)=> {
+        setStatus(e.currentTarget.value)
+    }
+
+    // const componentDidUpdate=(prevProps: Readonly<{status: string}>, prevState: Readonly<{}>)=> {
+    //     if (prevProps.status !== this.props.status) {
+    //         this.setState({
+    //             status: this.props.status
+    //         })
+    //     }
+    // }
+
+
+        return (
+            <div>
+                {!editMode &&
+                <div>
+                    <span onClick={editModeTrue}>{props.status || "-----"}</span>
+                </div>
+                }
+                {editMode &&
+                <div>
+                    <input value={status}
+                           onBlur={editModeFalse}
+                           onChange={onStatusChange}
+                           autoFocus={true}/>
+                </div>
+                }
+            </div>
+        )
+
+}
