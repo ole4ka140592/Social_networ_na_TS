@@ -38,9 +38,9 @@ type ProfileContainerType = MapStateAndDispatchToPropsType & AllMathParamsType
 class ProfileContainer extends React.Component<ProfileContainerType> {
 
     componentDidMount() {
-        let userId = Number(this.props.match.params.userId)
+        let userId: number | null = Number(this.props.match.params.userId)
         if (!userId) {
-            userId = Number(this.props.authorizedUserId)
+            userId = this.props.authorizedUserId
             if (!userId) {
                 if (!userId) {
                     this.props.history.push("/login")

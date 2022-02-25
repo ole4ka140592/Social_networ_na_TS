@@ -26,13 +26,23 @@ export type UserType = {
     }
 }
 
-export type UsersPageStateType = typeof usersPageState
+// export type UsersPageStateType = typeof usersPageState
+
+export type UsersPageStateType = {
+    users: Array<UserType>,
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
+    isFetching: boolean,
+    followingInProgress: Array<number>
+}
 
 export let usersPageState = {
+
     users: [] as Array<UserType>,
     totalUsersCount: 0,
     pageSize: 5,
-    currentPage: 2,
+    currentPage: 1,
     isFetching: false,
     followingInProgress: [] as Array<number>
 }
@@ -162,6 +172,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(setFetching(true))
+        dispatch(setCurrentPage(currentPage))
         usersAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(setFetching(false))
             dispatch(setUsers(data.items))
@@ -173,6 +184,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 export const getUsersPageChangedThunkCreator = (pageNumber: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(setCurrentPage(pageNumber))
+
         dispatch(setFetching(true))
         usersAPI.getUsers(pageNumber, pageSize).then(data => {
             dispatch(setFetching(false))

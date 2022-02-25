@@ -1,6 +1,6 @@
+import {getAuthUserDataThunkCreator} from "./authReducer";
 import {Dispatch} from "redux";
-import {authAPI} from "../api/api";
-import {getAuthUserDataThunkCreator, setAuthUserData} from "./authReducer";
+import {ActionsTypes} from "./reduxStore";
 
 
 const INITIALIZED_SUCCESS = "SET_INITIALIZED"
@@ -17,6 +17,7 @@ export const appReducer = (state = initialState, action: InitializedSuccessType)
 
     switch (action.type) {
         case INITIALIZED_SUCCESS: {
+            debugger
             return {
                 ...state,
                 initialized: true
@@ -36,8 +37,9 @@ export const initializedSuccess = () => {
     } as const
 }
 
-export const inizializeApp = () => (dispatch: any) => {
+export const initializeApp = () => (dispatch: any) => {
     let promise = dispatch(getAuthUserDataThunkCreator())
+    debugger
     Promise.all([promise])
         .then(()=> {
             dispatch(initializedSuccess())

@@ -12,7 +12,6 @@ type MapStateToProps = {
 
 type MapDispatchToPropsType = {
     sendMessage: (newMessageBody: string)=> void
-    // updateNewMessageBody: (body: string)=> void
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToProps => {

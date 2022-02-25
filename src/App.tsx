@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, ComponentType} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route, withRouter} from "react-router-dom";
@@ -12,16 +12,15 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {inizializeApp} from "./redux/appReducer";
 import {AppStateType} from "./redux/reduxStore";
 import {Preloader} from "./components/common/Preloader/Preloader";
-
+import {initializeApp} from "./redux/appReducer";
 
 
 class App extends Component<AppType> {
 
     componentDidMount() {
-        this.props.inizializeApp()
+        this.props.initializeApp()
     }
 
     render() {
@@ -46,9 +45,10 @@ class App extends Component<AppType> {
         );
     }
 }
-type AppType = MapDispatchToPropsType & MapStateToPropsType
+type AppType = MapStateToPropsType & MapDispatchToPropsType
+
 type MapDispatchToPropsType = {
-    inizializeApp: ()=> void
+    initializeApp: ()=> void
 }
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
@@ -56,6 +56,7 @@ const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
-export default compose<React.ComponentType>(
+export default compose<ComponentType>(
     withRouter,
-    connect(mapStateToProps, {inizializeApp}))(App)
+    connect(mapStateToProps, {initializeApp})
+)(App)
