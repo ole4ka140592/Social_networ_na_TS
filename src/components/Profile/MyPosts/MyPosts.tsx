@@ -12,26 +12,28 @@ type PropsTypeMyPosts = {
     posts: Array<PostsType>
 }
 
-export const MyPosts = (props: PropsTypeMyPosts) => {
+export class MyPosts extends React.Component<PropsTypeMyPosts> {
+    render() {
 
-    let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} like={p.like}/>)
+        let postsElements = this.props.posts.map(p => <Post key={p.id} message={p.message} like={p.like}/>)
 
-    const addPostForm = (values: FormDataAddPostType) => {
-        props.addPost(values.newPostText)
+        const addPostForm = (values: FormDataAddPostType) => {
+            this.props.addPost(values.newPostText)
+        }
+
+
+        return (
+            <div className={classes.postsBlock}>
+                <h3>My posts</h3>
+                <div>
+                    <AddPostFormRedux onSubmit={addPostForm}/>
+                </div>
+                <div className={classes.posts}>
+                    {postsElements}
+                </div>
+            </div>
+        )
     }
-
-
-    return (
-        <div className={classes.postsBlock}>
-            <h3>My posts</h3>
-            <div>
-                <AddPostFormRedux onSubmit={addPostForm}/>
-            </div>
-            <div className={classes.posts}>
-                {postsElements}
-            </div>
-        </div>
-    )
 }
 
 export type FormDataAddPostType = {

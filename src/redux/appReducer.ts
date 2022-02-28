@@ -1,6 +1,4 @@
 import {getAuthUserDataThunkCreator} from "./authReducer";
-import {Dispatch} from "redux";
-import {ActionsTypes} from "./reduxStore";
 
 
 const INITIALIZED_SUCCESS = "SET_INITIALIZED"
