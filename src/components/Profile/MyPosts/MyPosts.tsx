@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {PostsType} from "../../../redux/profileReducer";
@@ -12,7 +12,12 @@ type PropsTypeMyPosts = {
     posts: Array<PostsType>
 }
 
-export class MyPosts extends React.Component<PropsTypeMyPosts> {
+export class MyPosts extends PureComponent<PropsTypeMyPosts> {
+
+    // shouldComponentUpdate(nextProps: Readonly<PropsTypeMyPosts>, nextState: Readonly<{}>): boolean {
+    //     return nextProps !== this.props || nextState !== this.state
+    // }
+
     render() {
 
         let postsElements = this.props.posts.map(p => <Post key={p.id} message={p.message} like={p.like}/>)
