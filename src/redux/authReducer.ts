@@ -3,7 +3,7 @@ import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 
-const SET_USER_DATA = "SET_USER_DATA"
+const SET_USER_DATA = "SAMURAI-NETWORK/AUTH/SET_USER_DATA"
 
 export type AuthPageStateType = {
     userId: number | null

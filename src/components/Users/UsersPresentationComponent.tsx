@@ -3,6 +3,8 @@ import userPhoto from "../../assets/images/user.png"
 import React from "react";
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
+import {Paginator} from "../common/Paginator/Paginator";
+import {User} from "./User";
 
 
 type UsersPresentationComponentPropsType = {
@@ -20,54 +22,27 @@ type UsersPresentationComponentPropsType = {
 }
 
 export const UsersPresentationComponent = (props: UsersPresentationComponentPropsType) => {
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages = []
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i)
-    }
 
     return (
         <div>
-                <span>{pages.map(m => <span className={props.currentPage === m ? classes.selectedPage : ""}
-                                            onClick={(e) => {
-                                                props.onPageChanged(m)
-                                            }} key={m}>{m}</span>)}
-                </span>
-            {
-                props.users.map(m =>
-                    <div key={m.id}>
-                        <span>
-                            <div>
-                                <NavLink to={"/profile/" + m.id}>
-                                <img src={m.photos.small !== null ? m.photos.small : userPhoto} alt=""
-                                     className={classes.photo}/>
-                                    </NavLink>
-                            </div>
-                            <div>
-                                {m.followed
-                                    ? <button disabled={props.followingInProgress.some(id => id === m.id)}
-                                              onClick={() => {
-                                                  props.followThunkCreator(m.id)
-                                              }}>Unfollow</button>
-                                    : <button disabled={props.followingInProgress.some(id => id === m.id)}
-                                              onClick={() => {
-                                                  props.unFollowThunkCreator(m.id)
-                                              }}>Follow</button>
-                                }
-                            </div>
-                        </span>
-                        <span>
-                            <span>
-                                <div>{m.name}</div>
-                                <div>{m.status}</div>
-                            </span>
-                            <span>
-                                <div>{"m.location.country"}</div>
-                                <div>{"m.location.city"}</div>
-                            </span>
-                        </span>
-                    </div>)
-            }
+            <Paginator
+                totalUsersCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+                currentPage={props.currentPage}
+                onPageChanged={props.onPageChanged}
+            />
+            <div>
+                {
+                    props.users.map(m => <User
+                        user={m}
+                        follow={props.follow}
+                        followingInProgress={props.followingInProgress}
+                        followThunkCreator={props.followThunkCreator}
+                        unFollowThunkCreator={props.unFollowThunkCreator}
+                        key={m.id}
+                    />)
+                }
+            </div>
         </div>
     )
 }

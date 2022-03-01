@@ -5,7 +5,6 @@ import {AppStateType} from "../../redux/reduxStore";
 import React from "react";
 import {Redirect} from "react-router-dom";
 
-
 const Login: React.FC<MapDispatchToPropsType & MapStateToPropsType> = (props) => {
 
     const onSubmit = (formData: FormDataType) => {
