@@ -1,7 +1,7 @@
 import {ChangeEvent, useEffect, useState} from "react";
 
 
-type ProfileStatusPropsType = {
+export type ProfileStatusPropsType = {
     status: string
     updateStatus: (status: string) => void
 }

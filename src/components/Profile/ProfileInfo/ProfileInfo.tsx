@@ -5,7 +5,7 @@ import {Preloader} from "../../common/Preloader/Preloader";
 
 import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks";
 
-type ProfileInfoPropsType = {
+export type ProfileInfoPropsType = {
     profile: ProfileType
     status: string
     updateStatus: (status: string)=> void
