@@ -5,6 +5,7 @@ import {profileAPI, usersAPI} from "../api/api";
 
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
 
 export type PostsType = {
     id: number
@@ -73,12 +74,16 @@ export const profileReducer = (state: ProfilePageStateType = profilePageState,
             return {...state, status: action.status}
         }
 
+        case "SAVE_PHOTO_SUCCESS": {
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileType}
+        }
+
         default:
             return state
     }
 }
 
-export type ProfileReducerType = AddPostType | SetUserProfileType | SetStatusType
+export type ProfileReducerType = AddPostType | SetUserProfileType | SetStatusType | SavePhotoSuccessType
 
 export type SetStatusType = ReturnType<typeof setStatus>
 export const setStatus = (status: string) => {
@@ -104,6 +109,15 @@ export const setUserProfile = (profile: ProfileType) => {
     } as const
 }
 
+export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
+export const savePhotoSuccess = (photos: PhotosType) => {
+    return {
+        type: SAVE_PHOTO_SUCCESS,
+        photos
+    } as const
+}
+
+
 export const getUserProfileThunkCreator = (userId: number) => {
     return (dispatch: Dispatch) => {
         usersAPI.getProfile(userId)
@@ -125,6 +139,15 @@ export const updateUserStatusThunkCreator = (status: string) => (dispatch: Dispa
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(setStatus(status))
+            }
+        })
+}
+
+export const savePhoto = (file: string) => (dispatch: Dispatch) => {
+    profileAPI.savePhoto(file)
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(savePhotoSuccess(res.data.data.photos))
             }
         })
 }

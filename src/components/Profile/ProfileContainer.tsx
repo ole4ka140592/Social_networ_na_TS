@@ -3,7 +3,7 @@ import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {
     getUserProfileThunkCreator,
-    getUserStatusThunkCreator,
+    getUserStatusThunkCreator, savePhoto,
     updateUserStatusThunkCreator
 } from "../../redux/profileReducer";
 import {AppStateType} from "../../redux/reduxStore";
@@ -12,19 +12,12 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
-// export type MapStateToPropsType = {
-//     profile: ProfileType
-//     status: string
-//     authorizedUserId: number | null
-//     isAuth: boolean
-// }
-
 export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
-
 export type MapDispatchToPropsType = {
     getUserProfileThunkCreator: (userId: number | null) => void
     getUserStatusThunkCreator: (userId: number | null) => void
     updateUserStatusThunkCreator: (status: string) => void
+    savePhoto: (image: string)=> void
 }
 type MapStateAndDispatchToPropsType = MapStateToPropsType & MapDispatchToPropsType
 type MathParamsType = {
@@ -63,9 +56,12 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         return (
             <div>
                 <Profile
+                    isOwner={!this.props.match.params.userId}
                     profile={this.props.profile}
                     status={this.props.status}
-                    updateStatus={this.props.updateUserStatusThunkCreator}/>
+                    updateStatus={this.props.updateUserStatusThunkCreator}
+                    savePhoto={this.props.savePhoto}
+                />
             </div>
         )
     }
@@ -83,8 +79,8 @@ function mapStateToProps(state: AppStateType) {
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         getUserProfileThunkCreator,
-        getUserStatusThunkCreator, updateUserStatusThunkCreator
+        getUserStatusThunkCreator, updateUserStatusThunkCreator, savePhoto
     }),
     withRouter,
-    withAuthRedirect
+    // withAuthRedirect
 )(ProfileContainer)
