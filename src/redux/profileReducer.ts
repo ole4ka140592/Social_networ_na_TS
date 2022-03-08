@@ -13,27 +13,28 @@ export type PostsType = {
 }
 
 type ContactsType = {
-    facebook: string | null,
-    website: string | null,
-    vk: null,
-    twitter: string | null,
-    instagram: string | null,
-    youtube: string | null,
-    github: string | null,
-    mainLink: string | null
+    facebook: string,
+    website: string,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: string,
+    github: string,
+    mainLink: string
+}
+
+type PhotosType = {
+    small: string | null,
+    large: string | null
 }
 
 export type ProfileType = {
-    userId: number | null,
-    aboutMe: null | string,
-    contacts: ContactsType,
+    userId: number,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
-    photos: {
-        small: string | null,
-        large: string | null
-    }
+    contacts: ContactsType,
+    photos: PhotosType
 }
 
 let profilePageState = {
@@ -42,7 +43,7 @@ let profilePageState = {
         {id: 2, message: 'It is my first post', like: 20}
     ] as Array<PostsType>,
     // newPostText: '',
-    profile: {} as ProfileType,
+    profile: null as ProfileType | null,
     status: ''
 }
 

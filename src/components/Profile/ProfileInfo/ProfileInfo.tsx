@@ -2,13 +2,14 @@ import React from "react";
 import classes from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/profileReducer";
 import {Preloader} from "../../common/Preloader/Preloader";
-
 import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks";
+import userPhoto from "../../../assets/images/user.png";
+
 
 export type ProfileInfoPropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
     status: string
-    updateStatus: (status: string)=> void
+    updateStatus: (status: string) => void
 }
 
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -16,27 +17,20 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
         return <Preloader/>
     }
 
-
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img src='https://www.votpusk.ru/country/cnimages/new/italy.jpg'/>*/}
-            {/*</div>*/}
-
             <div className={classes.descriptionBlock}>
-                <div>ava + description</div>
-
-                {/*<img src={props.profile.photos.large}/>*/}
-
-                    {props.profile.aboutMe}
-
-
+                <div>
+                    <img src={props.profile.photos.large || userPhoto} className={classes.photo}/>
+                </div>
+                <div>
+                    {props.profile.fullName}
+                    {props.profile.lookingForAJobDescription}
+                    {props.profile.lookingForAJob}
+                    {props.profile.contacts.vk}
+                </div>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-
-
-
             </div>
-
         </div>
     )
 }

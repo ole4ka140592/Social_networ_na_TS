@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {
     getUserProfileThunkCreator,
     getUserStatusThunkCreator,
-    ProfileType,
     updateUserStatusThunkCreator
 } from "../../redux/profileReducer";
 import {AppStateType} from "../../redux/reduxStore";
@@ -37,7 +36,7 @@ type ProfileContainerType = MapStateAndDispatchToPropsType & AllMathParamsType
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
 
-    componentDidMount() {
+    refreshProfile() {
         let userId: number | null = Number(this.props.match.params.userId)
         if (!userId) {
             userId = this.props.authorizedUserId
@@ -49,6 +48,15 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         }
         this.props.getUserProfileThunkCreator(userId)
         this.props.getUserStatusThunkCreator(userId)
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileContainerType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId)
+        this.refreshProfile()
     }
 
     render() {
