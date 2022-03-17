@@ -7,16 +7,19 @@ import {Redirect} from "react-router-dom";
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {Textarea} from "../common/FormsControls/FormControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {OwnPropsType} from "./DialogsContainer";
+import {Preloader} from "../common/Preloader/Preloader";
 
 
-type PropsDialogsType = {
-    dialogsPage: DialogsPageStateType
-    sendMessage: (newMessageBody: string)=> void
-    updateNewMessageBody: (body: string)=> void
-    isAuth: boolean
-}
 
-export const Dialogs = (props: PropsDialogsType) => {
+// type PropsDialogsType = {
+//     dialogsPage: DialogsPageStateType
+//     sendMessage: (newMessageBody: string)=> void
+//     updateNewMessageBody: (body: string)=> void
+//     isAuth: boolean
+// }
+
+export const Dialogs = (props: OwnPropsType) => {
 
     let messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
@@ -26,8 +29,7 @@ export const Dialogs = (props: PropsDialogsType) => {
         props.sendMessage(values.newMassageBody)
     }
 
-    if (props.isAuth === false) return <Redirect to={"/login"}/>
-
+    if (!props.isAuth) {return <Redirect to={"/login"}/>}
 
     return (
         <div className={classes.dialogs}>

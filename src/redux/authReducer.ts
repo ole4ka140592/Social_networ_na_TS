@@ -26,7 +26,10 @@ export const authReducer = (state: AuthPageStateType = authPageState, action: Au
         case SET_USER_DATA: {
             return {
                 ...state,
-                ...action.data,
+                isAuth: action.isAuth,
+                userId: action.userId,
+                email: action.email,
+                login: action.login
             }
         }
 
@@ -43,20 +46,20 @@ export const setAuthUserData = (userId: number | null, login: string | null,
                                 isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
-        data: {
-            userId,
-            login,
-            email,
-            isAuth
-        }
+        userId,
+        login,
+        email,
+        isAuth
+
     } as const
 }
 
 export const getAuthUserDataThunkCreator = () => (dispatch: Dispatch) => {
-    authAPI.me()
+   return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data
+                debugger
                 dispatch(setAuthUserData(id, login, email, true));
             }
         })
@@ -79,7 +82,9 @@ export const login = (email: string, password: string, rememberMe: boolean) =>
 export const loginOuth = () => (dispatch: Dispatch) => {
     authAPI.logOuth()
         .then(response => {
+            debugger
             if (response.data.resultCode === 0) {
+                debugger
                 dispatch(setAuthUserData(null, null, null, false));
             }
         })

@@ -26,11 +26,13 @@ class App extends Component<AppType> {
         this.props.initializeApp()
     }
 
+
     render() {
         if (!this.props.initialized) {
             return <Preloader/>
         }
 
+debugger
         return (
             <div className='app-wrapper'>
                 <div className='header'>
@@ -48,6 +50,7 @@ class App extends Component<AppType> {
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='/dialogs' render={() => {
+                            debugger
                             return <React.Suspense fallback={<div>Загрузка...</div>}>
                                 <DialogsContainer/>
                             </React.Suspense>
@@ -70,7 +73,9 @@ type AppType = MapStateToPropsType & MapDispatchToPropsType
 type MapDispatchToPropsType = {
     initializeApp: () => void
 }
-type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+
+// type MapDispatchToPropsType = ReturnType<typeof initializeApp>
+    type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
 const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
@@ -78,5 +83,5 @@ const mapStateToProps = (state: AppStateType) => ({
 
 export default compose<ComponentType>(
     withRouter,
-    connect(mapStateToProps, {initializeApp})
+    connect<MapStateToPropsType,MapDispatchToPropsType,{},AppStateType>(mapStateToProps, {initializeApp})
 )(App)

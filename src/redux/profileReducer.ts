@@ -13,7 +13,7 @@ export type PostsType = {
     like: number
 }
 
-type ContactsType = {
+export type ContactsType = {
     facebook: string,
     website: string,
     vk: string,
@@ -35,7 +35,8 @@ export type ProfileType = {
     lookingForAJobDescription: string,
     fullName: string,
     contacts: ContactsType,
-    photos: PhotosType
+    photos: PhotosType,
+    aboutMe: string
 }
 
 let profilePageState = {
