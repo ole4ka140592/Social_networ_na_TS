@@ -55,7 +55,7 @@ debugger
                                 <DialogsContainer/>
                             </React.Suspense>
                         }}/>
-                        <Route path='/profile' render={() => {
+                        <Route path='/profile/:userId?' render={() => {
                             return <React.Suspense fallback={<div>Загрузка...</div>}>
                                 <ProfileContainer/>
                             </React.Suspense>

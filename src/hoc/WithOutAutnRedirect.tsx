@@ -14,12 +14,12 @@ let mapStateToPropsForRedirect = (state: AppStateType): mapStateToPropsForRedire
 
 export function withAuthRedirect<WCP>(WrappedComponent: React.ComponentType<WCP>) {
 
-    const RedirectComponent: React.FC<mapStateToPropsForRedirectType> = (props) =>{
+    const RedirectComponent: React.FC<mapStateToPropsForRedirectType> = (props) => {
         let {isAuth, ...restProps} = props;
-
+        debugger
         if (!isAuth) return <Redirect to='/login'/>
 
-        return <WrappedComponent {...restProps as WCP}/>
+        return <WrappedComponent {...props as WCP & mapStateToPropsForRedirectType}/>
 
     }
 

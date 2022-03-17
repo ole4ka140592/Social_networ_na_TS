@@ -3,16 +3,13 @@ import React, {ComponentType} from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../redux/reduxStore";
 import {ReactComponent} from "*.svg";
-import {Preloader} from "../components/common/Preloader/Preloader";
 
 type MapStateToPropsType = {
-    initialized: boolean
     isAuth: boolean
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    initialized: state.app.initialized,
-    isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth
 })
 
 type OwnType = ComponentType & MapStateToPropsType
@@ -29,17 +26,13 @@ export function withAuthRedirect<T>(Component: any) {
 //     }
 
     class RedirectComponent extends React.Component<OwnType> {
-        render() {
-            // if (!this.props.initialized) {
-            //     return <Preloader/>
-            // }
-            if (!this.props.isAuth && !this.props.initialized) return <Redirect to={"/login"}/>
-            return <Component {...this.props}/>
-        }
-
+    render() {
+        if (!this.props.isAuth) return <Redirect to={"/login"}/>
+        return <Component {...this.props}/>
     }
 
-    debugger
+    }
+debugger
     let ConnectedRedirectComponent = connect(mapStateToProps, null)(RedirectComponent)
     return ConnectedRedirectComponent
 }
