@@ -2,8 +2,9 @@ import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {
+    ContactsType,
     getUserProfileThunkCreator,
-    getUserStatusThunkCreator, savePhoto,
+    getUserStatusThunkCreator, ProfileType, savePhoto,
     updateUserStatusThunkCreator
 } from "../../redux/profileReducer";
 import {AppStateType} from "../../redux/reduxStore";
@@ -12,7 +13,15 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
-export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+// export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+
+export type MapStateToPropsType = {
+    isAuth: boolean,
+    profile: ProfileType,
+    status: string,
+    authorizedUserId: number | null
+}
+
 export type MapDispatchToPropsType = {
     getUserProfileThunkCreator: (userId: number | null) => void
     getUserStatusThunkCreator: (userId: number | null) => void

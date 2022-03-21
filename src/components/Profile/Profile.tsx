@@ -5,7 +5,7 @@ import {ProfileType} from "../../redux/profileReducer";
 
 type ProfilePropsType = {
     isAuth: boolean
-    profile: ProfileType | null
+    profile: ProfileType
     status: string
     updateStatus: (status: string)=> void
     isOwner: boolean

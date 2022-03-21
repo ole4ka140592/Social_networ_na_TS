@@ -9,7 +9,7 @@ import {Redirect} from "react-router-dom";
 
 export type ProfileInfoPropsType = {
     isAuth: boolean
-    profile: ProfileType | null
+    profile: ProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
@@ -36,6 +36,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                     <img src={props.profile.photos.large || userPhoto} className={classes.photo}/>
                     <div>{props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}</div>
                 </div>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                 <div>
                     <div>
                         <b>Full name</b>{props.profile.fullName}
@@ -51,21 +52,19 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                     <div>
                         <b>About me:</b>{props.profile.aboutMe}
                     </div>
-                    {/*<div>*/}
-                    {/*    <b>Contacts:</b>*/}
-                    {/*    {Object*/}
-                    {/*        .keys(props.profile.contacts)*/}
-                    {/*        .map(key=> {*/}
-                    {/*    return <Contact key={key} contactTitle={key}*/}
-                    {/*                    contactValue={props.profile.contacts[key as keyof ContactsType]}/>*/}
-                    {/*    }*/}
-                    {/*    )}*/}
-                    {/*</div>*/}
+                    <div>
+                        <b>Contacts:</b>
 
+                        {Object
+                            .keys(props.profile.contacts)
+                            .map(key=> {
 
-
+                                    return <Contact key={key} contactTitle={key}
+                                        contactValue={props.profile.contacts[key as keyof ContactsType]}/>
+                        }
+                        )}
+                    </div>
                 </div>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )
@@ -79,5 +78,5 @@ type ContactsPropsType = {
 }
 
 const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
-    return <div><b>{contactTitle}:</b>{contactValue}</div>
+    return <div className={classes.contact}><b>{contactTitle}:</b>{contactValue}</div>
 }
