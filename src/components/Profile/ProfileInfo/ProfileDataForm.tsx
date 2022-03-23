@@ -23,6 +23,9 @@ type own = ProfileDataFormType & InjectedFormProps<FormProfileDataType, ProfileD
 const ProfileDataForm = (props: own) => {
     return (
         <form onSubmit={props.handleSubmit}>
+            <div>
+                <button>save</button>
+            </div>
 
             <div>
                 <b>Full name:</b>
@@ -39,18 +42,19 @@ const ProfileDataForm = (props: own) => {
                 {<Field component={Input}
                         type="checkbox"
                         name={"lookingForAJo"}
+                        validate={required}
                 />}
             </div>
 
-            {props.profile.lookingForAJob &&
             <div>
                 <b>My professional skills:</b>{props.profile.lookingForAJobDescription}
                 {<Field component={Textarea}
                         type={"lookingForAJobDescription"}
                         name={"lookingForAJobDescription"}
+                        validate={required}
                 />}
             </div>
-            }
+
 
             <div>
                 <b>About me:</b>{props.profile.aboutMe}

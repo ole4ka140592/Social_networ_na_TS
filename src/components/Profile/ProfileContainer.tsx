@@ -4,13 +4,14 @@ import {connect} from "react-redux";
 import {
     ContactsType,
     getUserProfileThunkCreator,
-    getUserStatusThunkCreator, ProfileType, savePhoto,
+    getUserStatusThunkCreator, ProfileType, savePhoto, saveProfile,
     updateUserStatusThunkCreator
 } from "../../redux/profileReducer";
 import {AppStateType} from "../../redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {FormProfileDataType} from "./ProfileInfo/ProfileDataForm";
 
 
 // export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
@@ -27,6 +28,7 @@ export type MapDispatchToPropsType = {
     getUserStatusThunkCreator: (userId: number | null) => void
     updateUserStatusThunkCreator: (status: string) => void
     savePhoto: (image: string)=> void
+    saveProfile: (formData: FormProfileDataType)=> void
 }
 type MapStateAndDispatchToPropsType = MapStateToPropsType & MapDispatchToPropsType
 type MathParamsType = {
@@ -74,6 +76,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
                     status={this.props.status}
                     updateStatus={this.props.updateUserStatusThunkCreator}
                     savePhoto={this.props.savePhoto}
+                    saveProfile={this.props.saveProfile}
                 />
             </div>
         )
@@ -92,7 +95,8 @@ function mapStateToProps(state: AppStateType) {
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         getUserProfileThunkCreator,
-        getUserStatusThunkCreator, updateUserStatusThunkCreator, savePhoto
+        getUserStatusThunkCreator, updateUserStatusThunkCreator, savePhoto,
+        saveProfile
     }),
     withRouter,
     // withAuthRedirect

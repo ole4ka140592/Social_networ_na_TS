@@ -15,6 +15,7 @@ export type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (image: string) => void
+    saveProfile: (formData: FormProfileDataType)=> void
 }
 
 export type DataPropsType = {
@@ -42,7 +43,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
 
     const onSubmit = (formData: FormProfileDataType) => {
-        console.log(formData)
+        props.saveProfile(formData)
     }
 
 
@@ -73,11 +74,11 @@ export const ProfileData = (props: DataPropsType) => {
             <div>
                 <b>Looking for a job:</b>{props.profile.lookingForAJob ? "yes" : "no"}
             </div>
-            {props.profile.lookingForAJob &&
+            {/*{props.profile.lookingForAJob &&*/}
             <div>
                 <b>My professional skills:</b>{props.profile.lookingForAJobDescription}
             </div>
-            }
+            {/*}*/}
             <div>
                 <b>About me:</b>{props.profile.aboutMe}
             </div>
