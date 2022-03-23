@@ -10,3 +10,18 @@
 .contact {
     padding-left: 10px;
 }
+
+.formSummaryError {
+    border: red 1px solid;
+    padding: 5px;
+    color: red;
+}
+
+.formControl.error input,
+.formControl.error textarea {
+    border: red 2px solid;
+}
+
+.formControl.error span {
+    color: red;
+}

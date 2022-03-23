@@ -2,6 +2,7 @@ import {ActionsTypes, AppStateType} from "./reduxStore";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
+import {stopSubmit} from "redux-form";
 
 
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -161,6 +162,10 @@ export const saveProfile = (formData: FormProfileDataType) => (dispatch: Dispatc
             debugger
             if (res.data.resultCode === 0) {
                 dispatch(getUserProfileThunkCreator(userId))
+            } else {
+                let message = res.data.messages.length > 0 ? res.data.messages[0] : "Some error"
+                dispatch(stopSubmit("edit-profile", {_error: message}))
+                // return Promise.reject(res.data.messages[0])
             }
         })
 }

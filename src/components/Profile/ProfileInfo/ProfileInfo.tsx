@@ -42,10 +42,16 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
     if (!props.isAuth) return <Redirect to={'/login'}/>
 
 
-    const onSubmit = (formData: FormProfileDataType) => {
-        props.saveProfile(formData)
+    const onSubmit = async (formData: FormProfileDataType) => {
+        await props.saveProfile(formData)
         setEditMode(false)
-    }
+        // props.saveProfile(formData).then(
+        //     ()=> {
+        //         setEditMode(false)
+        //     })
+        }
+
+
 
 
     return (

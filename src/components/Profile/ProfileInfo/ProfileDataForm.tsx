@@ -10,6 +10,7 @@ import classes from "./ProfileInfo.module.css";
 type ProfileDataFormType = {
     profile: ProfileType
     onSubmit: (formData: FormProfileDataType) => void
+    error?: string
 }
 
 export type FormProfileDataType = {
@@ -27,6 +28,9 @@ const ProfileDataForm = (props: own) => {
             <div>
                 <button>save</button>
             </div>
+            {props.error && <div className={classes.formSummaryError}>
+                {props.error}
+            </div>}
 
             <div>
                 <b>Full name:</b>
@@ -43,7 +47,7 @@ const ProfileDataForm = (props: own) => {
                 {<Field component={Input}
                         type="checkbox"
                         name={"lookingForAJo"}
-                        validate={required}
+                        // validate={required}
                 />}
             </div>
             <div>
@@ -67,7 +71,7 @@ const ProfileDataForm = (props: own) => {
                 {Object
                     .keys(props.profile.contacts)
                     .map(key => {
-                        return <div className={classes.contact}>
+                        return <div key={key} className={classes.contact}>
                                 <b>{key}: {<Field placeholder={key}
                                     component={Input} name={"contacts." + key}/>}</b>
                         </div>
