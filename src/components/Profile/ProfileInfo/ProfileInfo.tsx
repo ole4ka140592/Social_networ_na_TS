@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import classes from './ProfileInfo.module.css'
 import {ContactsType, ProfileType} from "../../../redux/profileReducer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";
 import {Redirect} from "react-router-dom";
+import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm";
 
 
 export type ProfileInfoPropsType = {
@@ -16,7 +17,17 @@ export type ProfileInfoPropsType = {
     savePhoto: (image: string) => void
 }
 
+export type DataPropsType = {
+    profile: ProfileType
+    isOwner?: boolean
+    goToEditMode?: ()=> void
+}
+
+
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
+
+    let [editMode, setEditMode] = useState(false)
+
     if (!props.profile) {
         return <Preloader/>
     }
@@ -29,6 +40,12 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
     if (!props.isAuth) return <Redirect to={'/login'}/>
 
+
+    const onSubmit = (formData: FormProfileDataType) => {
+        console.log(formData)
+    }
+
+
     return (
         <div>
             <div className={classes.descriptionBlock}>
@@ -37,34 +54,44 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                     <div>{props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}</div>
                 </div>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-                <div>
-                    <div>
-                        <b>Full name</b>{props.profile.fullName}
-                    </div>
-                    <div>
-                        <b>Looking for a job:</b>{props.profile.lookingForAJob ? "yes" : "no"}
-                    </div>
-                    {props.profile.lookingForAJob &&
-                    <div>
-                        <b>My professional skills:</b>{props.profile.lookingForAJobDescription}
-                    </div>
-                    }
-                    <div>
-                        <b>About me:</b>{props.profile.aboutMe}
-                    </div>
-                    <div>
-                        <b>Contacts:</b>
 
-                        {Object
-                            .keys(props.profile.contacts)
-                            .map(key=> {
+                {editMode
+                    ? <ProfileDataForm profile={props.profile}  onSubmit={onSubmit}/>
+                    :<ProfileData goToEditMode={()=>{setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}
+            </div>
+        </div>
+    )
+}
 
-                                    return <Contact key={key} contactTitle={key}
-                                        contactValue={props.profile.contacts[key as keyof ContactsType]}/>
+export const ProfileData = (props: DataPropsType) => {
+    return (
+        <div>
+            {props.isOwner && <div><button onClick={props.goToEditMode}>edit</button></div>}
+            <div>
+                <b>Full name</b>{props.profile.fullName}
+            </div>
+            <div>
+                <b>Looking for a job:</b>{props.profile.lookingForAJob ? "yes" : "no"}
+            </div>
+            {props.profile.lookingForAJob &&
+            <div>
+                <b>My professional skills:</b>{props.profile.lookingForAJobDescription}
+            </div>
+            }
+            <div>
+                <b>About me:</b>{props.profile.aboutMe}
+            </div>
+            <div>
+                <b>Contacts:</b>
+
+                {Object
+                    .keys(props.profile.contacts)
+                    .map(key=> {
+
+                            return <Contact key={key} contactTitle={key}
+                                            contactValue={props.profile.contacts[key as keyof ContactsType]}/>
                         }
-                        )}
-                    </div>
-                </div>
+                    )}
             </div>
         </div>
     )
