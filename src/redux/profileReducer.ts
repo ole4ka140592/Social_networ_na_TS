@@ -1,4 +1,4 @@
-import {ActionsTypes} from "./reduxStore";
+import {ActionsTypes, AppStateType} from "./reduxStore";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
@@ -154,12 +154,13 @@ export const savePhoto = (file: string) => (dispatch: Dispatch) => {
         })
 }
 
-export const saveProfile = (formData: FormProfileDataType) => (dispatch: Dispatch) => {
+export const saveProfile = (formData: FormProfileDataType) => (dispatch: Dispatch<any>, getState: any) => {
+    const userId = getState().auth.userId
     profileAPI.saveProfile(formData)
         .then((res) => {
             debugger
             if (res.data.resultCode === 0) {
-                // dispatch(savePhotoSuccess(res.data.data.photos))
+                dispatch(getUserProfileThunkCreator(userId))
             }
         })
 }

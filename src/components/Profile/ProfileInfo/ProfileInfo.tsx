@@ -44,6 +44,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     const onSubmit = (formData: FormProfileDataType) => {
         props.saveProfile(formData)
+        setEditMode(false)
     }
 
 
@@ -57,7 +58,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
 
                 {editMode
-                    ? <ProfileDataForm profile={props.profile}  onSubmit={onSubmit}/>
+                    ? <ProfileDataForm profile={props.profile}  onSubmit={onSubmit} initialValues={props.profile}/>
                     :<ProfileData goToEditMode={()=>{setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}
             </div>
         </div>
