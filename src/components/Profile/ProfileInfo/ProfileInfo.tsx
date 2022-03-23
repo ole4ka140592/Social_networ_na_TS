@@ -106,6 +106,6 @@ type ContactsPropsType = {
     contactValue: string
 }
 
-const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
+export const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
     return <div className={classes.contact}><b>{contactTitle}:</b>{contactValue}</div>
 }

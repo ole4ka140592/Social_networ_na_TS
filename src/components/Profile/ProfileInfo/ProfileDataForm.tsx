@@ -1,17 +1,18 @@
 import React from "react";
 import {Input, Textarea} from "../../common/FormsControls/FormControls";
 import {required} from "../../../utils/validators/validators";
-import {ProfileType} from "../../../redux/profileReducer";
+import {ContactsType, ProfileType} from "../../../redux/profileReducer";
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
-
+import {Contact} from "./ProfileInfo";
+import classes from "./ProfileInfo.module.css";
 
 
 type ProfileDataFormType = {
     profile: ProfileType
-    onSubmit: (formData: FormProfileDataType)=> void
+    onSubmit: (formData: FormProfileDataType) => void
 }
 
-export type FormProfileDataType ={
+export type FormProfileDataType = {
     fullName: string,
     lookingForAJo: boolean,
     lookingForAJobDescription: string,
@@ -45,7 +46,6 @@ const ProfileDataForm = (props: own) => {
                         validate={required}
                 />}
             </div>
-
             <div>
                 <b>My professional skills:</b>{props.profile.lookingForAJobDescription}
                 {<Field component={Textarea}
@@ -54,8 +54,6 @@ const ProfileDataForm = (props: own) => {
                         validate={required}
                 />}
             </div>
-
-
             <div>
                 <b>About me:</b>{props.profile.aboutMe}
                 {<Field component={Textarea}
@@ -63,7 +61,18 @@ const ProfileDataForm = (props: own) => {
                         name={"aboutMe"}
                 />}
             </div>
+            <div>
+                <b>Contacts:</b>
 
+                {Object
+                    .keys(props.profile.contacts)
+                    .map(key => {
+                        return <div className={classes.contact}>
+                                <b>{key}: {<Field placeholder={key}
+                                    component={Input} name={"contacts." + key}/>}</b>
+                        </div>
+                        })}
+            </div>
         </form>
     )
 }
