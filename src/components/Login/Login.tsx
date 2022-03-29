@@ -4,6 +4,8 @@ import {login} from "../../redux/authReducer";
 import {AppStateType} from "../../redux/reduxStore";
 import React from "react";
 import {Redirect} from "react-router-dom";
+import classes from './Login.module.css'
+
 
 const Login: React.FC<MapDispatchToPropsType & MapStateToPropsType> = (props) => {
     const onSubmit = (formData: FormDataType) => {
@@ -18,7 +20,7 @@ const Login: React.FC<MapDispatchToPropsType & MapStateToPropsType> = (props) =>
 
 
 
-    return <div>
+    return <div className={classes.login}>
         <h1>Login</h1>
         <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
     </div>

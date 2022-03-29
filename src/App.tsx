@@ -13,7 +13,6 @@ import {compose} from "redux";
 import {AppStateType} from "./redux/reduxStore";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import {initializeApp} from "./redux/appReducer";
-
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 // import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -21,7 +20,6 @@ const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileCo
 
 
 class App extends Component<AppType> {
-
     componentDidMount() {
         this.props.initializeApp()
     }
@@ -35,9 +33,9 @@ class App extends Component<AppType> {
 debugger
         return (
             <div className='app-wrapper'>
-                <div className='header'>
+                {/*<div className='header'>*/}
                     <HeaderContainer/>
-                </div>
+                {/*</div>*/}
                 <div className='navbarAndContent'>
                     <div className='navbar'>
                         <Navbar/>
