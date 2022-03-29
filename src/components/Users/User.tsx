@@ -2,6 +2,7 @@ import classes from './Users.module.css'
 import userPhoto from "../../assets/images/user.png"
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {Paper} from "@material-ui/core";
 
 
 type UserType = {
@@ -17,15 +18,16 @@ export const User = (props: UserType) => {
 
     return (
         <div>
-
+            <Paper style={{padding: '10px', width: '200px', margin: "10px",
+                display: "flex-row", }}>
                         <span>
-                            <div>
+                            <div className={classes.userPhoto}>
                                 <NavLink to={"/profile/" + props.user.id}>
-                                <img src={props.user.photos.small !== null ? props.user.photos.small : userPhoto} alt=""
-                                     className={classes.photo}/>
-                                    </NavLink>
+
+                                <img src={props.user.photos.small !== null ? props.user.photos.small : userPhoto} alt="" className={classes.photo}/>
+                                </NavLink>
                             </div>
-                            <div>
+                            <div className={classes.button}>
                                 {props.user.followed
                                     ? <button disabled={props.followingInProgress.some(id => id === props.user.id)}
                                               onClick={() => {
@@ -38,6 +40,7 @@ export const User = (props: UserType) => {
                                 }
                             </div>
                         </span>
+                <div className={classes.data}>
             <span>
                             <span>
                                 <div>{props.user.name}</div>
@@ -48,6 +51,8 @@ export const User = (props: UserType) => {
                                 <div>{"m.location.city"}</div>
                             </span>
                         </span>
+                </div>
+                </Paper>
         </div>)
 }
 

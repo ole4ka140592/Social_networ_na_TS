@@ -2,19 +2,22 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import classes from './Navbar.module.css'
 
+import social from "../../assets/images/social.png";
+
 export const Navbar = () => {
     return (
         <nav className={classes.navAll}>
             <div className={classes.nav}>
                 <div className={classes.item}>
-                    <NavLink to='/profile' activeClassName={classes.activeLink}>Profile</NavLink>
+                    <NavLink to='/profile' activeClassName={classes.activeLink}>PROFILE</NavLink>
                 </div>
                 <div className={classes.item}>
-                    <NavLink to='/users' activeClassName={classes.activeLink}>Users</NavLink>
+                    <NavLink to='/users' activeClassName={classes.activeLink}>USERS</NavLink>
                 </div>
                 <div className={classes.item}>
-                    <NavLink to='/dialogs' activeClassName={classes.activeLink}>Messages</NavLink>
+                    <NavLink to='/dialogs' activeClassName={classes.activeLink}>MESSAGES</NavLink>
                 </div>
+
                 {/*<div className={classes.item}>*/}
                 {/*    <NavLink to='/news' activeClassName={classes.activeLink}>News</NavLink>*/}
                 {/*</div>*/}
@@ -25,8 +28,11 @@ export const Navbar = () => {
                 {/*    <NavLink to='/settings' activeClassName={classes.activeLink}>Settings</NavLink>*/}
                 {/*</div>*/}
                 <div className={classes.item}>
-                    <NavLink to='/login' activeClassName={classes.activeLink}>Login</NavLink>
+                    <NavLink to='/login' activeClassName={classes.activeLink}>LOGIN</NavLink>
                 </div>
+                {/*<div>*/}
+                {/*    <img src={social} className={classes.img}/>*/}
+                {/*</div>*/}
 
             </div>
         </nav>

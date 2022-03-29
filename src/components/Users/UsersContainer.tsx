@@ -7,7 +7,7 @@ import {follow, followThunkCreator, getUsersPageChangedThunkCreator, getUsersThu
 } from "../../redux/usersReducer";
 import React from "react";
 import {UsersPresentationComponent} from "./UsersPresentationComponent";
-import {Preloader} from "../common/Preloader/Preloader";
+
 import {compose} from "redux";
 import {
     getCurrentPage,
@@ -17,6 +17,8 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../redux/usersSelectors";
+import Preloader2 from "../common/Preloader/Preloader2";
+import classes from "./Users.module.css";
 
 
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -31,8 +33,12 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 
     render() {
-        return <>
-            {this.props.isFetching ? <Preloader/> : ""}
+        return <div>
+        <div className={classes.preloader2}>{this.props.isFetching
+                ? <Preloader2/>
+                : ""}
+        </div>
+            <div>
             <UsersPresentationComponent onPageChanged={this.onPageChanged}
                                         totalUsersCount={this.props.totalUsersCount}
                                         pageSize={this.props.pageSize}
@@ -46,7 +52,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
                                         unFollowThunkCreator={this.props.unFollowThunkCreator}
 
             />
-        </>
+            </div>
+        </div>
     }
 }
 
@@ -74,17 +81,6 @@ export type MapDispatchToPropsType = {
     followThunkCreator: (userId: number)=> void
     unFollowThunkCreator: (userId: number)=> void
 }
-
-// function mapStateToProps(state: AppStateType): MapStateToPropsType {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
 
 function mapStateToProps(state: AppStateType): MapStateToPropsType {
     return {

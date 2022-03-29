@@ -31,7 +31,7 @@ class App extends Component<AppType> {
             return <Preloader/>
         }
 
-        debugger
+
         return (
             <div className='app-wrapper'>
                 {/*<div className='header'>*/}

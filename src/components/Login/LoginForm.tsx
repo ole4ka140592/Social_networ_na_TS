@@ -4,6 +4,7 @@ import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../utils/validators/validators";
 import classes from "../common/FormsControls/FormControls.module.css";
 import {FormProfileDataType} from "../Profile/ProfileInfo/ProfileDataForm";
+import {Checkbox, FormControlLabel} from "@material-ui/core";
 
 export type FormDataType = {
     email: string
@@ -22,6 +23,10 @@ export const LoginForm: React.FC<ownType> = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
+
+            <p>Email: free@samuraijs.com</p>
+            <p>Password: free</p>
+
             <div>
                 <Field placeholder={"Email"}
                        component={Input}
@@ -40,6 +45,7 @@ export const LoginForm: React.FC<ownType> = (props) => {
                 <Field component={Input}
                        type="checkbox"
                        name={"rememberMe"}/>
+
                        remember me
             </div>
 
