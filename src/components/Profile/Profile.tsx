@@ -3,6 +3,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../redux/profileReducer";
 import {FormProfileDataType} from "./ProfileInfo/ProfileDataForm";
+import classes from "./ProfileContainer.module.css";
 
 type ProfilePropsType = {
     isAuth: boolean
@@ -16,7 +17,7 @@ type ProfilePropsType = {
 
 export const Profile = (props: ProfilePropsType) => {
     return (
-        <div>
+        <div className={classes.profile}>
             <ProfileInfo
                 isAuth={props.isAuth}
                 profile={props.profile}

@@ -19,6 +19,15 @@
 .logo img {
     width: 220px;
     height: 40px;
+    border-radius: 4px;
+}
+
+
+
+
+.img {
+    width: 30px;
+    height: 30px;
 }
 
 .loginBlock {
@@ -35,8 +44,35 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    font-family: BlinkMacSystemFont;
-    font-size: 20px;
+    font-family: sans-serif;
+    font-size: 18px;
     color: black;
     margin-right: 25px;
+}
+
+.loginItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: auto;
+    border: 1px black;
+    background-color: rgb(232, 240, 254);
+    /*background-color: #4bb34b;*/
+    border-radius: 4px;
+}
+
+.button {
+    width: 100px;
+    font-size: 14px;
+    color: white;
+    font-family: inherit;
+    line-height: 20px;
+    background-color: #4bb34b;
+    border-radius: 4px;
+}
+
+.loginReg {
+    width: 100px;
+    border: 1px black;
 }

@@ -13,6 +13,7 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {FormProfileDataType} from "./ProfileInfo/ProfileDataForm";
 
+import classes from './ProfileContainer.module.css'
 
 // export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
@@ -67,8 +68,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     render() {
 
         return (
-
-            <div>
+            <div className={classes.profile}>
                 <Profile
                     isAuth={this.props.isAuth}
                     isOwner={!this.props.match.params.userId}

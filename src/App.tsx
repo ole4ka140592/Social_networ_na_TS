@@ -13,6 +13,7 @@ import {compose} from "redux";
 import {AppStateType} from "./redux/reduxStore";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import {initializeApp} from "./redux/appReducer";
+
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 // import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -30,17 +31,18 @@ class App extends Component<AppType> {
             return <Preloader/>
         }
 
-debugger
+        debugger
         return (
             <div className='app-wrapper'>
                 {/*<div className='header'>*/}
-                    <HeaderContainer/>
+                <HeaderContainer/>
                 {/*</div>*/}
                 <div className='navbarAndContent'>
                     <div className='navbar'>
                         <Navbar/>
                     </div>
                     <div className='app-wrapper-content'>
+                        <div className='app-wrapper-conten-item'>
                         {/*<Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>*/}
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/news' render={() => <News/>}/>
@@ -48,7 +50,6 @@ debugger
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='/dialogs' render={() => {
-                            debugger
                             return <React.Suspense fallback={<div>Загрузка...</div>}>
                                 <DialogsContainer/>
                             </React.Suspense>
@@ -58,6 +59,7 @@ debugger
                                 <ProfileContainer/>
                             </React.Suspense>
                         }}/>
+                        </div>
                     </div>
                 </div>
 
@@ -73,7 +75,7 @@ type MapDispatchToPropsType = {
 }
 
 // type MapDispatchToPropsType = ReturnType<typeof initializeApp>
-    type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
 const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
@@ -81,5 +83,5 @@ const mapStateToProps = (state: AppStateType) => ({
 
 export default compose<ComponentType>(
     withRouter,
-    connect<MapStateToPropsType,MapDispatchToPropsType,{},AppStateType>(mapStateToProps, {initializeApp})
+    connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {initializeApp})
 )(App)

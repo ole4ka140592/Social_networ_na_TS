@@ -1,7 +1,8 @@
 import React from "react";
 import classes from './Header.module.css'
 import {NavLink} from "react-router-dom";
-
+import loading from "../../assets/images/loading.gif";
+import logout from "../../assets/images/logout.png";
 
 export type HeaderPropsType = {
     isAuth: boolean
@@ -13,7 +14,6 @@ export const Header = (props: HeaderPropsType) => {
     return (
         <div className={classes.header}>
                 <div className={classes.logo}>
-
                     <img alt=""
                          src='https://www.pngkit.com/png/full/361-3618320_full-hd-pictures-the-social-network-social-network.png'/>
                 </div>
@@ -21,8 +21,11 @@ export const Header = (props: HeaderPropsType) => {
                     <div className={classes.login}>
                     {props.isAuth
                         // && <div>{props.login} - <button onClick={props.loginOuth}>Log out</button></div>}
-                        ? <div>{props.login} - <button onClick={props.loginOuth}>Log out</button></div>
-                        : <NavLink to={"/login"}>LOGIN</NavLink>}
+                        ? <div className={classes.loginItem}>{props.login}
+                            {/*<button onClick={props.loginOuth} className={classes.button}>*/}
+                           <img src={logout} onClick={props.loginOuth} className={classes.img}/></div>
+                            // </button></div>
+                        : <NavLink to={"/login"} ><button className={classes.button}>LOGIN</button></NavLink>}
                 </div>
                 </div>
 
