@@ -3,8 +3,18 @@ import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../utils/validators/validators";
 import classes from "../common/FormsControls/FormControls.module.css";
+import style from "./Login.module.css";
 import {FormProfileDataType} from "../Profile/ProfileInfo/ProfileDataForm/ProfileDataForm";
-import {Checkbox, FormControlLabel} from "@material-ui/core";
+import {
+    Button,
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    FormGroup,
+    FormLabel,
+    Grid,
+    TextField
+} from "@material-ui/core";
 
 export type FormDataType = {
     email: string
@@ -22,16 +32,37 @@ type ownType = CaptchaType & InjectedFormProps<FormDataType, CaptchaType>
 export const LoginForm: React.FC<ownType> = (props) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className={style.login}>
 
-            <p>Email: free@samuraijs.com</p>
-            <p>Password: free</p>
 
+<div>
+            <Grid container justifyContent={'center'}>
+                <Grid item justifyContent={'center'}>
+                    <FormControl>
+                        <FormLabel style={{padding: '10px', width: '300px', margin: "1px",
+                            display: "flex-row", textAlign: "center" }}>
+                            <p>To log in get registered <a href={'https://social-network.samuraijs.com/'}
+                                   target={'_blank'}> here
+                                </a> or use common test account credentials:</p>
+                            <p>Email: free@samuraijs.com</p>
+                            <p>Password: free</p>
+                        </FormLabel>
+
+                    </FormControl>
+                </Grid>
+            </Grid>
+
+</div>
+
+
+<div>
             <div>
                 <Field placeholder={"Email"}
                        component={Input}
                        name={"email"}
-                       validate={required}/>
+                       validate={required}
+                       className={style.inputBorder}
+                />
             </div>
             <div>
                 <Field placeholder={"Password"}
@@ -39,15 +70,18 @@ export const LoginForm: React.FC<ownType> = (props) => {
                        name={"password"}
                        validate={required}
                        type={"password"}
+                       className={style.inputBorder}
                 />
             </div>
-            <div>
+            <div className={style.checkbox}>
+                <div>
                 <Field component={Input}
                        type="checkbox"
                        name={"rememberMe"}/>
-
-                       remember me
+                </div>
+                <div className={style.color}>remember me</div>
             </div>
+</div>
 
             {props.captchaUrl && <img src={props.captchaUrl}/>}
             {props.captchaUrl && <Field placeholder={"captcha"}
@@ -59,7 +93,7 @@ export const LoginForm: React.FC<ownType> = (props) => {
 
             {props.error && <div className={classes.formSummaryError}>{props.error}</div>}
             <div>
-                <button>Login</button>
+                <button  className={classes.button}>LOGIN</button>
             </div>
         </form>
     )

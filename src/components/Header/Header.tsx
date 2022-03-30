@@ -27,8 +27,8 @@ export const Header = (props: HeaderPropsType) => {
                            <img src={logout} onClick={props.loginOuth} className={classes.img}/></div>
                             // </button></div>
                         : <NavLink to={"/login"} >
-                            <Button variant="contained" color="success" size="medium"  className={classes.button}>LOGIN</Button>
-                            {/*<button className={classes.button}>LOGIN</button>*/}
+                            {/*<Button variant="contained" color="success" size="medium"  className={classes.button}>LOGIN</Button>*/}
+                            <button className={classes.button}>LOGIN</button>
                         </NavLink>}
                 </div>
                 </div>

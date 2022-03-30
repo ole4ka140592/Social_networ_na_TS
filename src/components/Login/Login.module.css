@@ -1,9 +1,26 @@
 .login {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    /*align-items: center;*/
+    justify-content: center;
+    align-items: center;
     border: 1px solid;
     min-height: 100vh;
-
 }
+
+.inputBorder {
+    border: 1px solid #dce1e6;
+    width: 270px;
+    height: 35px;
+    border-radius: 3px;
+    margin: 3px;
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.color {
+    color: rgba(0, 0, 0, 0.6);
+}
+

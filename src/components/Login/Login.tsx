@@ -19,15 +19,15 @@ const Login: React.FC<MapDispatchToPropsType & MapStateToPropsType> = (props) =>
     }
 
 
-
-    return <div className={classes.login}>
-        <h1>Login</h1>
+    return <div >
+        {/*<div><h1>Login</h1></div>*/}
         <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
+
     </div>
 }
 
 type MapDispatchToPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string)=> void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
 type MapStateToPropsType = {
