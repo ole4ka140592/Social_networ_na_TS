@@ -1,6 +1,6 @@
 import axios from "axios";
 import {ProfileType} from "../redux/profileReducer";
-import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
+import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm";
 
 const instance = axios.create({
     withCredentials: true,

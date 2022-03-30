@@ -1,7 +1,7 @@
 import {ActionsTypes, AppStateType} from "./reduxStore";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
-import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
+import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm";
 import {stopSubmit} from "redux-form";
 
 

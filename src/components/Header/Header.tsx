@@ -3,6 +3,7 @@ import classes from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import loading from "../../assets/images/loading.gif";
 import logout from "../../assets/images/logout.png";
+import {Button} from "@material-ui/core";
 
 export type HeaderPropsType = {
     isAuth: boolean
@@ -25,7 +26,10 @@ export const Header = (props: HeaderPropsType) => {
                             {/*<button onClick={props.loginOuth} className={classes.button}>*/}
                            <img src={logout} onClick={props.loginOuth} className={classes.img}/></div>
                             // </button></div>
-                        : <NavLink to={"/login"} ><button className={classes.button}>LOGIN</button></NavLink>}
+                        : <NavLink to={"/login"} >
+                            <Button variant="contained" color="success" size="medium"  className={classes.button}>LOGIN</Button>
+                            {/*<button className={classes.button}>LOGIN</button>*/}
+                        </NavLink>}
                 </div>
                 </div>
 

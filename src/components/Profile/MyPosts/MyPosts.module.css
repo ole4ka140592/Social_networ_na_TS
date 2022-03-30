@@ -2,7 +2,18 @@
     padding: 10px;
 }
 
+.post {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
 
 .posts {
     margin-top: 10px;
+}
+
+.myPosts {
+    text-align: center;
 }

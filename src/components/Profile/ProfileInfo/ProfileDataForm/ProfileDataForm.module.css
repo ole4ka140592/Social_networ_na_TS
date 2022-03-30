@@ -1,0 +1,18 @@
+.button {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.color {
+    color: #626d7a;
+    font-size: 17px;
+}
+
+.save {
+    width: 250px;
+    height: 20px;
+    border-radius: 4px;
+    background-color: green;
+    color: white;
+}

@@ -29,7 +29,7 @@ export class MyPosts extends PureComponent<PropsTypeMyPosts> {
 
         return (
             <div className={classes.postsBlock}>
-                <h3>My posts</h3>
+                <h2 className={classes.myPosts}>My posts</h2>
                 <div>
                     <AddPostFormRedux onSubmit={addPostForm}/>
                 </div>
@@ -49,7 +49,7 @@ let maxLength10 = maxLengthCreator(10)
 
 const AddPostForm: React.FC<InjectedFormProps<FormDataAddPostType>> = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className={classes.post}>
             <Field component={Textarea}
                    name={"newPostText"}
                    validate={[required, maxLength10]}

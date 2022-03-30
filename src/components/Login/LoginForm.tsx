@@ -3,7 +3,7 @@ import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../utils/validators/validators";
 import classes from "../common/FormsControls/FormControls.module.css";
-import {FormProfileDataType} from "../Profile/ProfileInfo/ProfileDataForm";
+import {FormProfileDataType} from "../Profile/ProfileInfo/ProfileDataForm/ProfileDataForm";
 import {Checkbox, FormControlLabel} from "@material-ui/core";
 
 export type FormDataType = {

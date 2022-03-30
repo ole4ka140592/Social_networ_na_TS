@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import classes from './ProfileInfo.module.css'
 import {ContactsType, ProfileType} from "../../../redux/profileReducer";
 import {Preloader} from "../../common/Preloader/Preloader";
-import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks";
+import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks/ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";
 import {Redirect} from "react-router-dom";
-import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm";
+import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm/ProfileDataForm";
+import {Button} from "@material-ui/core";
 
 
 export type ProfileInfoPropsType = {
@@ -15,13 +16,13 @@ export type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (image: string) => void
-    saveProfile: (formData: FormProfileDataType)=> void
+    saveProfile: (formData: FormProfileDataType) => void
 }
 
 export type DataPropsType = {
     profile: ProfileType
     isOwner?: boolean
-    goToEditMode?: ()=> void
+    goToEditMode?: () => void
 }
 
 
@@ -49,52 +50,65 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
         //     ()=> {
         //         setEditMode(false)
         //     })
-        }
-
-
+    }
 
 
     return (
-        <div>
-            <div className={classes.descriptionBlock}>
-                <div>
-                    <img src={props.profile.photos.large || userPhoto} className={classes.photo}/>
-                    <div>{props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}</div>
-                </div>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
 
+            <div >
+                <div className={classes.profileUserPhotoStatus}>
+                    <div className={classes.profileUserPhoto}>
+                        <img src={props.profile.photos.large || userPhoto} className={classes.photo}/>
+                        <div>{props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}</div>
+                    </div>
+                    <div>
+                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                    </div>
+                </div>
+
+                <div >
                 {editMode
-                    ? <ProfileDataForm profile={props.profile}  onSubmit={onSubmit} initialValues={props.profile}/>
-                    :<ProfileData goToEditMode={()=>{setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}
+                    ? <ProfileDataForm profile={props.profile} onSubmit={onSubmit} initialValues={props.profile}/>
+                    : <ProfileData goToEditMode={() => {
+                        setEditMode(true)
+                    }} profile={props.profile} isOwner={props.isOwner}/>}
+                </div>
             </div>
-        </div>
+
     )
 }
 
 export const ProfileData = (props: DataPropsType) => {
     return (
         <div>
-            {props.isOwner && <div><button onClick={props.goToEditMode}>edit</button></div>}
+            {props.isOwner && <div className={classes.edit}>
+                {/*<Button variant="contained" onClick={props.goToEditMode} size="small" style={{width: '250px', height: "20px"}}>edit</Button>*/}
+                <button className={classes.button} onClick={props.goToEditMode}>EDIT</button>
+            </div>}
             <div>
-                <b>Full name</b>{props.profile.fullName}
+                <b className={classes.color}>Full name: </b>
+                {props.profile.fullName}
             </div>
             <div>
-                <b>Looking for a job:</b>{props.profile.lookingForAJob ? "yes" : "no"}
+                <b className={classes.color}>Looking for a job: </b>
+                {props.profile.lookingForAJob ? "yes" : "no"}
             </div>
             {/*{props.profile.lookingForAJob &&*/}
-            <div>
-                <b>My professional skills:</b>{props.profile.lookingForAJobDescription}
+            <div className={classes.professionalSkills}>
+                <b className={classes.color}> My professional skills: </b>
+                <div className={classes.professional}>{props.profile.lookingForAJobDescription}</div>
             </div>
             {/*}*/}
             <div>
-                <b>About me:</b>{props.profile.aboutMe}
+                <b className={classes.color}>About me: </b>
+                <div className={classes.professional}>{props.profile.aboutMe}</div>
             </div>
             <div>
-                <b>Contacts:</b>
+                <b className={classes.color}>Contacts: </b>
 
                 {Object
                     .keys(props.profile.contacts)
-                    .map(key=> {
+                    .map(key => {
 
                             return <Contact key={key} contactTitle={key}
                                             contactValue={props.profile.contacts[key as keyof ContactsType]}/>
@@ -106,12 +120,11 @@ export const ProfileData = (props: DataPropsType) => {
 }
 
 
-
 type ContactsPropsType = {
     contactTitle: string
     contactValue: string
 }
 
 export const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
-    return <div className={classes.contact}><b>{contactTitle}:</b>{contactValue}</div>
+    return <div className={classes.contact}><b className={classes.color}>{contactTitle}: </b>{contactValue}</div>
 }

@@ -11,7 +11,7 @@ import {AppStateType} from "../../redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {FormProfileDataType} from "./ProfileInfo/ProfileDataForm";
+import {FormProfileDataType} from "./ProfileInfo/ProfileDataForm/ProfileDataForm";
 
 import classes from './ProfileContainer.module.css'
 
@@ -68,7 +68,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     render() {
 
         return (
-            <div className={classes.profile}>
+            <div >
                 <Profile
                     isAuth={this.props.isAuth}
                     isOwner={!this.props.match.params.userId}

@@ -9,7 +9,7 @@ import {Textarea} from "../common/FormsControls/FormControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {OwnPropsType} from "./DialogsContainer";
 import {Preloader} from "../common/Preloader/Preloader";
-
+import {TextField} from "@material-ui/core";
 
 
 // type PropsDialogsType = {
@@ -29,18 +29,25 @@ export const Dialogs = (props: OwnPropsType) => {
         props.sendMessage(values.newMassageBody)
     }
 
-    if (!props.isAuth) {return <Redirect to={"/login"}/>}
+    if (!props.isAuth) {
+        return <Redirect to={"/login"}/>
+    }
 
     return (
         <div className={classes.dialogs}>
 
-            <div className={classes.dialogsItems}>
-                {dialogsElements}
+            <div className={classes.dialogsItemsAndmessagesElements}>
+                <div className={classes.dialogsItems}>
+                    {dialogsElements}
+                </div>
+                <div className={classes.messageContainer}>{messagesElements}</div>
+
+                <div className={classes.messages}>
+                    <AddMessageFormRedux onSubmit={addNewMessage}/>
+                </div>
             </div>
-            <div className={classes.messages}>
-                <div>{messagesElements}</div>
-                <AddMessageFormRedux onSubmit={addNewMessage}/>
-            </div>
+
+
 
         </div>
     )
@@ -50,16 +57,17 @@ type FormDataAddMessageType = {
     newMassageBody: string
 }
 
-const  maxLength50 = maxLengthCreator(50)
+const maxLength50 = maxLengthCreator(50)
 
 const AddMessageForm: React.FC<InjectedFormProps<FormDataAddMessageType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field  component={Textarea}
-                        validate={[required, maxLength50]}
-                        name={"newMassageBody"}
-                        placeholder={"Enter your message"}
+                <Field component={Textarea}
+                       validate={[required, maxLength50]}
+                       name={"newMassageBody"}
+                       placeholder={"Enter your message"}
+
                 />
             </div>
             <div>

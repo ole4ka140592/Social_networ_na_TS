@@ -2,9 +2,20 @@
     padding: 10px;
 }
 
+.profileUserPhoto {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
 .photo{
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    text-align: center;
+
 }
 
 .contact {
@@ -24,4 +35,29 @@
 
 .formControl.error span {
     color: red;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.color {
+    color: #626d7a;
+    font-size: 17px;
+}
+
+.professional {
+    width: 300px;
+}
+
+.button {
+    width: 250px;
+    height: 20px;
+    border-radius: 4px;
+    background-color: rgb(232, 240, 254);
+    color: black;
 }

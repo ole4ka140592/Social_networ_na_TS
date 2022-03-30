@@ -21,14 +21,13 @@ export let dialogsPageState = {
         {id: 3, name: 'Sveta'},
         {id: 4, name: 'Sasha'},
         {id: 5, name: 'Viktor'},
-        {id: 6, name: 'Valera'},
     ] as Array<DialogsType>,
     messages: [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'How are you'},
-        {id: 3, message: 'Yoy'},
-        {id: 4, message: 'Yoy'},
-        {id: 5, message: 'Yoy'},
+        {id: 1, message: 'Hi!'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'Where you from?'},
+        {id: 4, message: 'How old are you?'},
+        {id: 5, message: 'Bye!'},
     ] as Array<MessagesType>,
     // newMessageBody: ""
 }
