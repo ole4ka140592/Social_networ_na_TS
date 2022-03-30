@@ -3,7 +3,7 @@
     display:flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
     font-size: 20px;
     border: 1px solid black;
@@ -19,17 +19,18 @@
     line-height: 1.5;
 }
 
-/*.messages {*/
-/*    display:flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    width: 70%;*/
-/*    height: 20%;*/
-/*    margin-top: 20px;*/
-/*    border: 1px solid black;*/
-/*}*/
+.messages {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
 
+.dialogsElementsMessagesElements {
+    display:flex;
+    margin-right: 100px;
+}
 
 .dialogsItems {
     width: 100px;
