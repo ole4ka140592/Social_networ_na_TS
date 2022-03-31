@@ -1,8 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import classes from './Navbar.module.css'
-
-import social from "../../assets/images/social.png";
+import fon2 from "../../assets/images/fon2.jpg";
 
 export const Navbar = () => {
     return (
@@ -32,6 +31,9 @@ export const Navbar = () => {
                 </div>
                 {/*<div>*/}
                 {/*    <img src={social} className={classes.img}/>*/}
+                {/*/!*</div>*!/*/}
+                {/*<div className={classes.img}>*/}
+                {/*    <img src={fon2} width='150px' />*/}
                 {/*</div>*/}
 
             </div>

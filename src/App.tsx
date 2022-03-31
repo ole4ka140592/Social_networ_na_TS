@@ -13,6 +13,7 @@ import {compose} from "redux";
 import {AppStateType} from "./redux/reduxStore";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import {initializeApp} from "./redux/appReducer";
+import Preloader2 from "./components/common/Preloader/Preloader2";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
