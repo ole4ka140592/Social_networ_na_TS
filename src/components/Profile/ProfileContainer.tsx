@@ -2,7 +2,6 @@ import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {
-    ContactsType,
     getUserProfileThunkCreator,
     getUserStatusThunkCreator, ProfileType, savePhoto, saveProfile,
     updateUserStatusThunkCreator

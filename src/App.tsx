@@ -1,6 +1,5 @@
-import React, {Component, ComponentType, Suspense} from 'react';
+import React, {Component, ComponentType} from 'react';
 import './App.css';
-import {Navbar} from "./components/Navbar/Navbar";
 import {Route, withRouter} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
@@ -13,12 +12,9 @@ import {compose} from "redux";
 import {AppStateType} from "./redux/reduxStore";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import {initializeApp} from "./redux/appReducer";
-import Preloader2 from "./components/common/Preloader/Preloader2";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
-// import ProfileContainer from "./components/Profile/ProfileContainer";
-// import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 class App extends Component<AppType> {
@@ -26,25 +22,17 @@ class App extends Component<AppType> {
         this.props.initializeApp()
     }
 
-
     render() {
         if (!this.props.initialized) {
             return <Preloader/>
         }
 
-
         return (
             <div className='app-wrapper'>
-                {/*<div className='header'>*/}
                 <HeaderContainer/>
-                {/*</div>*/}
                 <div className='navbarAndContent'>
-                    <div className='navbar'>
-                        <Navbar/>
-                    </div>
                     <div className='app-wrapper-content'>
                         <div className='app-wrapper-conten-item'>
-                        {/*<Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>*/}
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/news' render={() => <News/>}/>
                         <Route path='/music' render={() => <Music/>}/>
@@ -63,7 +51,6 @@ class App extends Component<AppType> {
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
@@ -75,7 +62,6 @@ type MapDispatchToPropsType = {
     initializeApp: () => void
 }
 
-// type MapDispatchToPropsType = ReturnType<typeof initializeApp>
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
 const mapStateToProps = (state: AppStateType) => ({

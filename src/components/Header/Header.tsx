@@ -1,9 +1,9 @@
 import React from "react";
 import classes from './Header.module.css'
 import {NavLink} from "react-router-dom";
-import loading from "../../assets/images/loading.gif";
 import logout from "../../assets/images/logout.png";
-import {Button} from "@material-ui/core";
+import {Navbar} from "../Navbar/Navbar";
+
 
 export type HeaderPropsType = {
     isAuth: boolean
@@ -18,6 +18,9 @@ export const Header = (props: HeaderPropsType) => {
                     <img alt=""
                          src='https://www.pngkit.com/png/full/361-3618320_full-hd-pictures-the-social-network-social-network.png'/>
                 </div>
+            <div>
+                <Navbar/>
+            </div>
                 <div className={classes.loginBlock}>
                     <div className={classes.login}>
                     {props.isAuth
