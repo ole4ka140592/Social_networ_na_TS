@@ -41,7 +41,7 @@ export let usersPageState = {
 
     users: [] as Array<UserType>,
     totalUsersCount: 0,
-    pageSize: 6,
+    pageSize: 12,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [] as Array<number>

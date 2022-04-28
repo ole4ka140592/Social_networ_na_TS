@@ -1,11 +1,8 @@
-
-import userPhoto from "../../assets/images/user.png"
 import React from "react";
 import {UserType} from "../../redux/usersReducer";
-import {NavLink} from "react-router-dom";
 import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User";
-import classes from './Users.module.css'
+import classes from './UsersPresentationComponent.module.css'
 
 
 type UsersPresentationComponentPropsType = {
