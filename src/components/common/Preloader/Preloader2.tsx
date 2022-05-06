@@ -17,7 +17,6 @@ export default function Preloader2() {
         }, 500);
 
         return () => {
-            debugger
             clearInterval(timer);
         };
     }, []);

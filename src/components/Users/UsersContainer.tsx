@@ -8,7 +8,6 @@ import {
 } from "../../redux/usersReducer";
 import React from "react";
 import {UsersPresentationComponent} from "./UsersPresentationComponent";
-
 import {compose} from "redux";
 import {
     getCurrentPage,

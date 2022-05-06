@@ -21,15 +21,15 @@ type UsersPresentationComponentPropsType = {
 
 export const UsersPresentationComponent = (props: UsersPresentationComponentPropsType) => {
 
-    return (<div>
-        <div className={classes.paginator}>
-            <Paginator
-                totalUsersCount={props.totalUsersCount}
-                pageSize={props.pageSize}
-                currentPage={props.currentPage}
-                onPageChanged={props.onPageChanged}
-            />
-        </div>
+    return (<div className={classes.paginatorAndUsers}>
+            <div className={classes.paginator}>
+                <Paginator
+                    totalUsersCount={props.totalUsersCount}
+                    pageSize={props.pageSize}
+                    currentPage={props.currentPage}
+                    onPageChanged={props.onPageChanged}
+                />
+            </div>
             <div className={classes.users}>
                 {
                     props.users.map(m => <User

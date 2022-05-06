@@ -10,13 +10,6 @@ import {OwnPropsType} from "./DialogsContainer";
 import {Divider, List, ListItem, ListItemText} from "@material-ui/core";
 
 
-// type PropsDialogsType = {
-//     dialogsPage: DialogsPageStateType
-//     sendMessage: (newMessageBody: string)=> void
-//     updateNewMessageBody: (body: string)=> void
-//     isAuth: boolean
-// }
-
 export const Dialogs = (props: OwnPropsType) => {
 
     let messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
@@ -25,6 +18,7 @@ export const Dialogs = (props: OwnPropsType) => {
 
     const addNewMessage = (values: FormDataAddMessageType) => {
         props.sendMessage(values.newMassageBody)
+        values.newMassageBody=""
     }
 
     if (!props.isAuth) {
@@ -39,8 +33,6 @@ export const Dialogs = (props: OwnPropsType) => {
 
     return (
         <div className={classes.dialogs}>
-
-            {/*<div className={classes.dialogsItemsAndmessagesElements}>*/}
             <div className={classes.dialogsElementsMessagesElements}>
                 <div>
                     <List sx={style} component="nav" aria-label="mailbox folders">
@@ -48,11 +40,9 @@ export const Dialogs = (props: OwnPropsType) => {
                         <ListItem button divider>
                             <ListItemText primary={dialogsElements}/>
                         </ListItem>
-
                         <Divider light/>
                     </List>
                 </div>
-
                 <div>
                     <List sx={style} component="nav" aria-label="mailbox folders">
                         <Divider/>
@@ -62,16 +52,11 @@ export const Dialogs = (props: OwnPropsType) => {
                         <Divider light/>
                     </List>
                 </div>
-
             </div>
-
 
             <div className={classes.messages}>
                 <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
-            {/*</div>*/}
-
-
         </div>
     )
 }
@@ -90,7 +75,6 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDataAddMessageType>> = (pro
                        validate={[required, maxLength50]}
                        name={"newMassageBody"}
                        placeholder={"Enter your message"}
-
                 />
             </div>
             <div>

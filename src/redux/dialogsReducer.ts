@@ -8,11 +8,6 @@ export type MessagesType = {
     id: number
     message: string
 }
-// export type DialogsPageType = {
-//     dialogs: Array<DialogsType>
-//     messages: Array<MessagesType>
-//     newMessageBody: string
-// }
 
 export let dialogsPageState = {
     dialogs: [
@@ -29,7 +24,6 @@ export let dialogsPageState = {
         {id: 4, message: 'How old are you?'},
         {id: 5, message: 'Bye!'},
     ] as Array<MessagesType>,
-    // newMessageBody: ""
 }
 
 export type DialogsPageStateType = typeof dialogsPageState
@@ -40,19 +34,10 @@ export const dialogsReducer = (state: DialogsPageStateType = dialogsPageState,
 
 
     switch (action.type) {
-        // case "UPDATE-NEW-MESSAGE-BODY": {
-        //     let stateCopy = {
-        //         ...state,
-        //         newMessageBody: action.body
-        //     }
-        //     return stateCopy
-        // }
-
         case "SEND-MESSAGE": {
             let body = action.newMessageBody
             let stateCopy = {
                 ...state,
-                // newMessageBody : "",
                 messages: [...state.messages, {id: 6, message: body}]
             }
 
@@ -65,16 +50,6 @@ export const dialogsReducer = (state: DialogsPageStateType = dialogsPageState,
 }
 
 export type DialogsReducerType = SendMessageAC
-    // | UpdateNewMessageBodyAC
-
-// export type UpdateNewMessageBodyAC = ReturnType<typeof updateNewMessageBodyAC>
-//
-// export const updateNewMessageBodyAC = (body: string) => {
-//     return {
-//         type: "UPDATE-NEW-MESSAGE-BODY",
-//         body
-//     } as const
-// }
 
 export type SendMessageAC = ReturnType<typeof sendMessageAC>
 

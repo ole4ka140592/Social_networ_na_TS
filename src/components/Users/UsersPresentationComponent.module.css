@@ -1,3 +1,9 @@
+.paginatorAndUsers {
+   display:flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
 .paginator {
    display:flex;
    flex-direction: row;
@@ -11,6 +17,5 @@
    align-items: center;
    flex-wrap: wrap;
    align-content: center;
-
 }
 

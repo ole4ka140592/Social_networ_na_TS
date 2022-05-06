@@ -6,7 +6,6 @@ import classes from './Navbar.module.css'
 export const Navbar = () => {
     return (
         <nav className={classes.navAll}>
-            {/*<div className={classes.nav}>*/}
                 <div className={classes.item}>
                     <NavLink to='/profile' activeClassName={classes.activeLink}>PROFILE</NavLink>
                 </div>
@@ -19,7 +18,6 @@ export const Navbar = () => {
                 <div className={classes.item}>
                     <NavLink to='/login' activeClassName={classes.activeLink}>LOGIN</NavLink>
                 </div>
-            {/*</div>*/}
         </nav>
 
     )

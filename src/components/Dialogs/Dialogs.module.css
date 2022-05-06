@@ -6,17 +6,6 @@
     align-items: flex-start;
     min-height: 100vh;
     font-size: 20px;
-    /*border: 1px solid black;*/
-}
-
-.dialogsItemsAndmessagesElements {
-    width: 70%;
-    height: 50%;
-    /*border: 1px solid black;*/
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    line-height: 1.5;
 }
 
 .messages {
@@ -31,26 +20,3 @@
     display:flex;
     margin-right: 100px;
 }
-
-.dialogsItems {
-    width: 100px;
-    text-decoration: none;
-    /*padding: 10px;*/
-
-}
-
-.dialogsItems .active {
-    /*color: gold;*/
-}
-
-.messageContainer {
-
-}
-
-.dialogsItemsElements {
-}
-
-.message {
-
-}
-

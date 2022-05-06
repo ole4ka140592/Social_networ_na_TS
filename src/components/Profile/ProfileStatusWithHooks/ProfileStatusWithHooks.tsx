@@ -30,15 +30,6 @@ export const ProfileStatusWithHooks = (props: ProfileStatusPropsType) =>  {
         setStatus(e.currentTarget.value)
     }
 
-    // const componentDidUpdate=(prevProps: Readonly<{status: string}>, prevState: Readonly<{}>)=> {
-    //     if (prevProps.status !== this.props.status) {
-    //         this.setState({
-    //             status: this.props.status
-    //         })
-    //     }
-    // }
-
-
         return (
             <div>
                 {!editMode &&

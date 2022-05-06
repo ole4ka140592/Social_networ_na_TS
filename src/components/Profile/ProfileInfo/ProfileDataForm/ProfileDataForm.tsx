@@ -1,11 +1,9 @@
 import React from "react";
 import {Input, Textarea} from "../../../common/FormsControls/FormControls";
 import {required} from "../../../../utils/validators/validators";
-import {ContactsType, ProfileType} from "../../../../redux/profileReducer";
+import {ProfileType} from "../../../../redux/profileReducer";
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
-import {Contact} from "../ProfileInfo";
 import classes from "./ProfileDataForm.module.css";
-import {Button} from "@material-ui/core";
 
 
 type ProfileDataFormType = {
@@ -38,7 +36,6 @@ const ProfileDataForm = (props: own) => {
                 <b className={classes.color}>Full name:</b>
                 {<Field placeholder={"fullName"}
                         component={Input}
-
                         name={"fullName"}
                         validate={required}
                         type={"fullName"}

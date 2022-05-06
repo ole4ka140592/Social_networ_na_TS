@@ -8,13 +8,11 @@ import {
 } from "../../redux/profileReducer";
 import {AppStateType} from "../../redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {FormProfileDataType} from "./ProfileInfo/ProfileDataForm/ProfileDataForm";
+import classes from "./Profile.module.css";
 
-import classes from './ProfileContainer.module.css'
 
-// export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
 export type MapStateToPropsType = {
     isAuth: boolean,
@@ -55,6 +53,8 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         this.props.getUserStatusThunkCreator(userId)
     }
 
+
+
     componentDidMount() {
         this.refreshProfile()
     }
@@ -67,7 +67,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     render() {
 
         return (
-            <div >
+            <div className={classes.profileContainer}>
                 <Profile
                     isAuth={this.props.isAuth}
                     isOwner={!this.props.match.params.userId}

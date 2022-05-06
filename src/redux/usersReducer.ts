@@ -41,7 +41,7 @@ export let usersPageState = {
 
     users: [] as Array<UserType>,
     totalUsersCount: 0,
-    pageSize: 12,
+    pageSize: 8,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [] as Array<number>
@@ -184,7 +184,6 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 export const getUsersPageChangedThunkCreator = (pageNumber: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(setCurrentPage(pageNumber))
-
         dispatch(setFetching(true))
         usersAPI.getUsers(pageNumber, pageSize).then(data => {
             dispatch(setFetching(false))

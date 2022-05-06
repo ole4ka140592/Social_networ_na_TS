@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import classes from './ProfileInfo.module.css'
 import {ContactsType, ProfileType} from "../../../redux/profileReducer";
-import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks/ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";
 import {Redirect} from "react-router-dom";
 import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm/ProfileDataForm";
-import {Button} from "@material-ui/core";
+import Preloader2 from "../../common/Preloader/Preloader2";
 
 
 export type ProfileInfoPropsType = {
@@ -31,7 +30,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
     let [editMode, setEditMode] = useState(false)
 
     if (!props.profile) {
-        return <Preloader/>
+        return <div className={classes.preloader}><Preloader2/></div>
     }
 
     const onMainPhotoSelected = (e: any) => {
@@ -46,10 +45,6 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
     const onSubmit = async (formData: FormProfileDataType) => {
         await props.saveProfile(formData)
         setEditMode(false)
-        // props.saveProfile(formData).then(
-        //     ()=> {
-        //         setEditMode(false)
-        //     })
     }
 
 

@@ -61,3 +61,8 @@
     background-color: rgb(232, 240, 254);
     color: black;
 }
+
+.preloader {
+    position: relative;
+
+}

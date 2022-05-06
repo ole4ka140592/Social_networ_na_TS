@@ -4,16 +4,9 @@ import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../utils/validators/validators";
 import classes from "../common/FormsControls/FormControls.module.css";
 import style from "./Login.module.css";
-import {FormProfileDataType} from "../Profile/ProfileInfo/ProfileDataForm/ProfileDataForm";
 import {
-    Button,
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    FormGroup,
-    FormLabel,
+    FormControl, FormLabel,
     Grid,
-    TextField
 } from "@material-ui/core";
 
 export type FormDataType = {
@@ -33,56 +26,51 @@ export const LoginForm: React.FC<ownType> = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit} className={style.login}>
-
-
-<div>
-            <Grid container justifyContent={'center'}>
-                <Grid item justifyContent={'center'}>
-                    <FormControl>
-                        <FormLabel style={{padding: '10px', width: '300px', margin: "1px",
-                            display: "flex-row", textAlign: "center" }}>
-                            <p>To log in get registered <a href={'https://social-network.samuraijs.com/'}
-                                   target={'_blank'}> here
+            <div>
+                <Grid container justifyContent={'center'}>
+                    <Grid item justifyContent={'center'}>
+                        <FormControl>
+                            <FormLabel style={{
+                                padding: '10px', width: '300px', margin: "1px",
+                                display: "flex-row", textAlign: "center"
+                            }}>
+                                <p>To log in get registered <a href={'https://social-network.samuraijs.com/'}
+                                                               target={'_blank'}> here
                                 </a> or use common test account credentials:</p>
-                            <p>Email: free@samuraijs.com</p>
-                            <p>Password: free</p>
-                        </FormLabel>
-
-                    </FormControl>
+                                <p>Email: free.it.free1@gmail.com</p>
+                                <p>Password: 123456789</p>
+                            </FormLabel>
+                        </FormControl>
+                    </Grid>
                 </Grid>
-            </Grid>
-
-</div>
-
-
-<div>
-            <div>
-                <Field placeholder={"Email"}
-                       component={Input}
-                       name={"email"}
-                       validate={required}
-                       className={style.inputBorder}
-                />
             </div>
             <div>
-                <Field placeholder={"Password"}
-                       component={Input}
-                       name={"password"}
-                       validate={required}
-                       type={"password"}
-                       className={style.inputBorder}
-                />
-            </div>
-            <div className={style.checkbox}>
                 <div>
-                <Field component={Input}
-                       type="checkbox"
-                       name={"rememberMe"}/>
+                    <Field placeholder={"Email"}
+                           component={Input}
+                           name={"email"}
+                           validate={required}
+                           className={style.inputBorder}
+                    />
                 </div>
-                <div className={style.color}>remember me</div>
+                <div>
+                    <Field placeholder={"Password"}
+                           component={Input}
+                           name={"password"}
+                           validate={required}
+                           type={"password"}
+                           className={style.inputBorder}
+                    />
+                </div>
+                <div className={style.checkbox}>
+                    <div>
+                        <Field component={Input}
+                               type="checkbox"
+                               name={"rememberMe"}/>
+                    </div>
+                    <div className={style.color}>remember me</div>
+                </div>
             </div>
-</div>
-
             {props.captchaUrl && <img src={props.captchaUrl}/>}
             {props.captchaUrl && <Field placeholder={"captcha"}
                                         component={Input}
@@ -90,10 +78,9 @@ export const LoginForm: React.FC<ownType> = (props) => {
                                         validate={required}
                                         type={"captcha"}/>}
 
-
             {props.error && <div className={classes.formSummaryError}>{props.error}</div>}
             <div>
-                <button  className={classes.button}>LOGIN</button>
+                <button className={classes.button}>LOGIN</button>
             </div>
         </form>
     )

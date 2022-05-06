@@ -1,4 +1,4 @@
-import {ActionsTypes, AppStateType} from "./reduxStore";
+import {ActionsTypes} from "./reduxStore";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm";
@@ -46,7 +46,6 @@ let profilePageState = {
         {id: 1, message: 'Hi, how are you?', like: 15},
         {id: 2, message: 'It is my first post', like: 20}
     ] as Array<PostsType>,
-    // newPostText: '',
     profile: null as ProfileType | null,
     status: ''
 }

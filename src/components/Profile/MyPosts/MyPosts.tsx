@@ -14,16 +14,13 @@ type PropsTypeMyPosts = {
 
 export class MyPosts extends PureComponent<PropsTypeMyPosts> {
 
-    // shouldComponentUpdate(nextProps: Readonly<PropsTypeMyPosts>, nextState: Readonly<{}>): boolean {
-    //     return nextProps !== this.props || nextState !== this.state
-    // }
-
     render() {
 
         let postsElements = this.props.posts.map(p => <Post key={p.id} message={p.message} like={p.like}/>)
 
         const addPostForm = (values: FormDataAddPostType) => {
             this.props.addPost(values.newPostText)
+            values.newPostText=""
         }
 
 
