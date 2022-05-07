@@ -102,9 +102,9 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 export const loginOuth = () => (dispatch: Dispatch) => {
     authAPI.logOuth()
         .then(response => {
-            debugger
+
             if (response.data.resultCode === 0) {
-                debugger
+
                 dispatch(setAuthUserData(null, null, null, false));
             }
         })

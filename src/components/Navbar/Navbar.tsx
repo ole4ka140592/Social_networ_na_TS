@@ -3,7 +3,13 @@ import {NavLink} from "react-router-dom";
 import classes from './Navbar.module.css'
 
 
-export const Navbar = () => {
+export type NavbarPropsType = {
+    loginOuth: () => void
+    isAuth: boolean
+}
+
+export const Navbar = (props: NavbarPropsType) => {
+
     return (
         <nav className={classes.navAll}>
                 <div className={classes.item}>
@@ -15,9 +21,13 @@ export const Navbar = () => {
                 <div className={classes.item}>
                     <NavLink to='/dialogs' activeClassName={classes.activeLink}>MESSAGES</NavLink>
                 </div>
-                <div className={classes.item}>
-                    <NavLink to='/login' activeClassName={classes.activeLink}>LOGIN</NavLink>
+            {props.isAuth
+                ?<div className={classes.item}>
+                    <button onClick={props.loginOuth}>LOGOUT</button>
                 </div>
+                :<div className={classes.item}>
+                    <NavLink to='/login' activeClassName={classes.activeLink}>LOGIN</NavLink>
+                </div>}
         </nav>
 
     )
