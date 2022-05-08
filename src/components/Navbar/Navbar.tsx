@@ -23,7 +23,7 @@ export const Navbar = (props: NavbarPropsType) => {
                 </div>
             {props.isAuth
                 ?<div className={classes.item}>
-                    <button onClick={props.loginOuth}>LOGOUT</button>
+                    <div onClick={props.loginOuth}>LOGOUT</div>
                 </div>
                 :<div className={classes.item}>
                     <NavLink to='/login' activeClassName={classes.activeLink}>LOGIN</NavLink>
