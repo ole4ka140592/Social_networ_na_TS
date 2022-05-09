@@ -17,6 +17,7 @@ type UsersPresentationComponentPropsType = {
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     followThunkCreator: (userID: number) => void
     unFollowThunkCreator: (userID: number) => void
+    isAuth: boolean
 }
 
 export const UsersPresentationComponent = (props: UsersPresentationComponentPropsType) => {
@@ -39,6 +40,7 @@ export const UsersPresentationComponent = (props: UsersPresentationComponentProp
                         followThunkCreator={props.followThunkCreator}
                         unFollowThunkCreator={props.unFollowThunkCreator}
                         key={m.id}
+                        isAuth={props.isAuth}
                     />)
                 }
             </div>

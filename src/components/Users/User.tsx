@@ -11,6 +11,7 @@ type UserType = {
     followingInProgress: Array<number>
     followThunkCreator: (userID: number) => void
     unFollowThunkCreator: (userID: number) => void
+    isAuth: boolean
 }
 
 export const User = (props: UserType) => {
@@ -29,11 +30,11 @@ export const User = (props: UserType) => {
                             </div>
                             <div className={classes.button}>
                                 {props.user.followed
-                                    ? <button disabled={props.followingInProgress.some(id => id === props.user.id)}
+                                    ? <button disabled={!props.isAuth || props.followingInProgress.some(id => id === props.user.id)}
                                               onClick={() => {
                                                   props.followThunkCreator(props.user.id)
                                               }}>Unfollow</button>
-                                    : <button disabled={props.followingInProgress.some(id => id === props.user.id)}
+                                    : <button disabled={!props.isAuth || props.followingInProgress.some(id => id === props.user.id)}
                                               onClick={() => {
                                                   props.unFollowThunkCreator(props.user.id)
                                               }}>Follow</button>
