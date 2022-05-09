@@ -33,8 +33,7 @@ class App extends Component<AppType> {
                 <div className='navbarAndContent'>
                     <div className='app-wrapper-content'>
                         <Route path='/login' render={() => <Login/>}/>
-                        {!this.props.initialized && <Route path='/login' render={() => <Login/>}/>}
-                        {/*<Route path='/' render={() => <Login/>}/>*/}
+                        {/*{this.props.initialized && <Route path='/login' render={() => <Login/>}/>}*/}
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/news' render={() => <News/>}/>
                         <Route path='/music' render={() => <Music/>}/>
@@ -49,12 +48,11 @@ class App extends Component<AppType> {
                                 <ProfileContainer/>
                             </React.Suspense>
                         }}/>
+                        {!this.props.isAuth && <Redirect to={'/login'}/>}
                     </div>
                 </div>
             </div>
         );
-
-
     }
 }
 

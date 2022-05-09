@@ -5,7 +5,6 @@ import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks/ProfileStatusWit
 import userPhoto from "../../../assets/images/user.png";
 import {Redirect} from "react-router-dom";
 import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm/ProfileDataForm";
-import Preloader2 from "../../common/Preloader/Preloader2";
 
 
 export type ProfileInfoPropsType = {
@@ -28,10 +27,6 @@ export type DataPropsType = {
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     let [editMode, setEditMode] = useState(false)
-
-    // if (!props.profile) {
-    //     return <div className={classes.preloader}><Preloader2/></div>
-    // }
 
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
