@@ -11,6 +11,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {FormProfileDataType} from "./ProfileInfo/ProfileDataForm/ProfileDataForm";
 import classes from "./Profile.module.css";
+import Preloader2 from "../common/Preloader/Preloader2";
 
 
 
@@ -65,8 +66,11 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     }
 
     render() {
-
+        if (!this.props.profile) {
+            return <div className={classes.preloader}><Preloader2/></div>
+        }
         return (
+
             <div className={classes.profileContainer}>
                 <Profile
                     isAuth={this.props.isAuth}

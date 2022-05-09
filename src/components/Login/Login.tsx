@@ -4,6 +4,7 @@ import {login} from "../../redux/authReducer";
 import {AppStateType} from "../../redux/reduxStore";
 import React from "react";
 import {Redirect} from "react-router-dom";
+import Preloader2 from "../common/Preloader/Preloader2";
 
 
 const Login: React.FC<MapDispatchToPropsType & MapStateToPropsType> = (props) => {
@@ -13,10 +14,8 @@ const Login: React.FC<MapDispatchToPropsType & MapStateToPropsType> = (props) =>
 
 
     if (props.isAuth) {
-        debugger
         return <Redirect to={"/profile"}/>
     }
-
 
     return <div >
         <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>

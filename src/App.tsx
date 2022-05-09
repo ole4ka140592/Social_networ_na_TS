@@ -1,6 +1,6 @@
 import React, {Component, ComponentType} from 'react';
 import './App.css';
-import {Route, withRouter} from "react-router-dom";
+import {Redirect, Route, withRouter} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -10,7 +10,6 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {AppStateType} from "./redux/reduxStore";
-
 import {initializeApp} from "./redux/appReducer";
 import Preloader2 from "./components/common/Preloader/Preloader2";
 
@@ -33,27 +32,29 @@ class App extends Component<AppType> {
                 <HeaderContainer/>
                 <div className='navbarAndContent'>
                     <div className='app-wrapper-content'>
-                        <div className='app-wrapper-conten-item'>
+                        <Route path='/login' render={() => <Login/>}/>
+                        {!this.props.initialized && <Route path='/login' render={() => <Login/>}/>}
+                        {/*<Route path='/' render={() => <Login/>}/>*/}
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/news' render={() => <News/>}/>
                         <Route path='/music' render={() => <Music/>}/>
                         <Route path='/settings' render={() => <Settings/>}/>
-                        <Route path='/login' render={() => <Login/>}/>
                         <Route path='/dialogs' render={() => {
-                            return <React.Suspense fallback={<div>Загрузка...</div>}>
+                            return <React.Suspense fallback={<></>}>
                                 <DialogsContainer/>
                             </React.Suspense>
                         }}/>
                         <Route path='/profile/:userId?' render={() => {
-                            return <React.Suspense fallback={<div>Загрузка...</div>}>
+                            return <React.Suspense fallback={<></>}>
                                 <ProfileContainer/>
                             </React.Suspense>
                         }}/>
-                        </div>
                     </div>
                 </div>
             </div>
         );
+
+
     }
 }
 
@@ -66,7 +67,8 @@ type MapDispatchToPropsType = {
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
 const mapStateToProps = (state: AppStateType) => ({
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
+    isAuth: state.auth.isAuth
 })
 
 export default compose<ComponentType>(

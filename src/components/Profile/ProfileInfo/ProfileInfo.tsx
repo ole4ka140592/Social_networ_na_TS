@@ -29,9 +29,9 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     let [editMode, setEditMode] = useState(false)
 
-    if (!props.profile) {
-        return <div className={classes.preloader}><Preloader2/></div>
-    }
+    // if (!props.profile) {
+    //     return <div className={classes.preloader}><Preloader2/></div>
+    // }
 
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
