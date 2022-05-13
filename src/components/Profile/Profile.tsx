@@ -26,7 +26,7 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div className={classes.profile}>
             <div className={classes.descriptionBlock}>
-                <Paper style={{minWidth: '500px'}}>
+                <Paper>
                     <ProfileInfo
                         isAuth={props.isAuth}
                         profile={props.profile}
@@ -39,9 +39,9 @@ export const Profile = (props: ProfilePropsType) => {
                 </Paper>
             </div>
             {authId === profileId ? <div className={classes.myPostsContainer}>
-                <Paper style={{minWidth: '500px'}}>
+                <Paper>
                     <MyPostsContainer/>
-                </Paper>
+                </Paper                   >
             </div> : ""}
 
         </div>

@@ -158,7 +158,6 @@ export const saveProfile = (formData: FormProfileDataType) => (dispatch: Dispatc
     const userId = getState().auth.userId
     profileAPI.saveProfile(formData)
         .then((res) => {
-            debugger
             if (res.data.resultCode === 0) {
                 dispatch(getUserProfileThunkCreator(userId))
             } else {
