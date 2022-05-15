@@ -32,8 +32,8 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
         if (e.target.files.length) {
             props.savePhoto(e.target.files[0])
         }
-
     }
+
     if (!props.isAuth) return <Redirect to={'/login'}/>
 
 
@@ -44,12 +44,11 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
 
     return (
-
             <div >
                 <div className={classes.profileUserPhotoStatus}>
                     <div className={classes.profileUserPhoto}>
                         <img src={props.profile.photos.large || userPhoto} className={classes.photo}/>
-                        <div className={classes.abc}>{props.isOwner && <input type={"file"} onChange={onMainPhotoSelected} className={classes.custom}/>}</div>
+                        <div className={classes.file}>{props.isOwner && <input type={"file"} onChange={onMainPhotoSelected} className={classes.custom}/>}</div>
                     </div>
                     <div>
                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
@@ -72,12 +71,11 @@ export const ProfileData = (props: DataPropsType) => {
     return (
         <div>
             {props.isOwner && <div className={classes.edit}>
-                {/*<Button variant="contained" onClick={props.goToEditMode} size="small" style={{width: '250px', height: "20px"}}>edit</Button>*/}
-                <button className={classes.button} onClick={props.goToEditMode}>EDIT</button>
+               <button className={classes.button} onClick={props.goToEditMode}>EDIT</button>
             </div>}
             <div>
                 <b className={classes.color}>Full name: </b>
-                {props.profile.fullName}
+                <div className={classes.fullName}>{props.profile.fullName}</div>
             </div>
             <div>
                 <b className={classes.color}>Looking for a job: </b>
@@ -95,6 +93,7 @@ export const ProfileData = (props: DataPropsType) => {
             </div>
             <div>
                 <b className={classes.color}>Contacts: </b>
+                <div className={classes.contacts}>
 
                 {Object
                     .keys(props.profile.contacts)
@@ -104,6 +103,7 @@ export const ProfileData = (props: DataPropsType) => {
                                             contactValue={props.profile.contacts[key as keyof ContactsType]}/>
                         }
                     )}
+                </div>
             </div>
         </div>
     )
