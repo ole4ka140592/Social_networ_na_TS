@@ -7,10 +7,18 @@
     margin-top: 20px;
 }
 
+@media screen and (max-width: 570px) {
+    .profile {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+
 .descriptionBlock {
-    width: 40%;
+    width: 35%;
 }
 
 .myPostsContainer {
-    width: 40%;
+    width: 35%;
 }

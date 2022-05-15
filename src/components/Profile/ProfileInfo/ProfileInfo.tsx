@@ -49,7 +49,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <div className={classes.profileUserPhotoStatus}>
                     <div className={classes.profileUserPhoto}>
                         <img src={props.profile.photos.large || userPhoto} className={classes.photo}/>
-                        <div>{props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}</div>
+                        <div className={classes.abc}>{props.isOwner && <input type={"file"} onChange={onMainPhotoSelected} className={classes.custom}/>}</div>
                     </div>
                     <div>
                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>

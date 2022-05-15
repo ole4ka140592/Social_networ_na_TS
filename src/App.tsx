@@ -49,7 +49,7 @@ class App extends Component<AppType> {
                             </React.Suspense>
                         }}/>
                         {!this.props.isAuth && <Redirect to={'/login'}/>}
-                        {this.props.isAuth && <Redirect to={'/profile'}/>}
+                        {/*{this.props.isAuth && <Redirect to={'/profile'}/>}*/}
                     </div>
                 </div>
             </div>

@@ -20,8 +20,8 @@ type ProfilePropsType = {
 
 export const Profile = (props: ProfilePropsType) => {
 
-    const authId = useSelector<AppStateType, number | null>(state=> state.auth.userId)
-    const profileId = useSelector<AppStateType, number | undefined>(state=> state.profilePage.profile?.userId)
+    const authId = useSelector<AppStateType, number | null>(state => state.auth.userId)
+    const profileId = useSelector<AppStateType, number | undefined>(state => state.profilePage.profile?.userId)
 
     return (
         <div className={classes.profile}>
@@ -38,12 +38,13 @@ export const Profile = (props: ProfilePropsType) => {
                     />
                 </Paper>
             </div>
-            {authId === profileId ? <div className={classes.myPostsContainer}>
-                <Paper>
-                    <MyPostsContainer/>
-                </Paper                   >
-            </div> : ""}
-
+            <>
+                {authId === profileId ? <div className={classes.myPostsContainer}>
+                    <Paper>
+                        <MyPostsContainer/>
+                    </Paper>
+                </div> : ""}
+            </>
         </div>
     )
 }
