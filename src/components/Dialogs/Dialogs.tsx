@@ -34,8 +34,8 @@ export const Dialogs = (props: OwnPropsType) => {
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsElementsMessagesElements}>
-                <div>
-                    <List sx={style} component="nav" aria-label="mailbox folders">
+                <div className={classes.dialogsElements}>
+                    <List sx={style} component="nav" aria-label="mailbox folders" style={{width: '100%'}}>
                         <Divider/>
                         <ListItem button divider>
                             <ListItemText primary={dialogsElements}/>
@@ -43,8 +43,8 @@ export const Dialogs = (props: OwnPropsType) => {
                         <Divider light/>
                     </List>
                 </div>
-                <div>
-                    <List sx={style} component="nav" aria-label="mailbox folders">
+                <div className={classes.messagesElements}>
+                    <List sx={style} component="nav" aria-label="mailbox folders" style={{width: '100%'}}>
                         <Divider/>
                         <ListItem button divider>
                             <ListItemText primary={messagesElements}/>

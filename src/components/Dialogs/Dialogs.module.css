@@ -8,6 +8,14 @@
     font-size: 20px;
 }
 
+@media screen and (max-width: 995px) {
+    .dialogs {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+
 .messages {
     display:flex;
     flex-direction: column;
@@ -19,6 +27,4 @@
 
 .dialogsElementsMessagesElements {
     display:flex;
-    /*margin-right: 100px;*/
-    width: 50%;
 }
