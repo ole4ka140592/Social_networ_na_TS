@@ -81,7 +81,6 @@ export const ProfileData = (props: DataPropsType) => {
                 <b className={classes.color}>Looking for a job: </b>
                 {props.profile.lookingForAJob ? "yes" : "no"}
             </div>
-            {/*{props.profile.lookingForAJob &&*/}
             <div className={classes.professionalSkills}>
                 <b className={classes.color}> My professional skills: </b>
                 <div className={classes.professional}>{props.profile.lookingForAJobDescription}</div>

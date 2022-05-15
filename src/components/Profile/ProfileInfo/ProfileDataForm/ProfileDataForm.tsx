@@ -25,7 +25,6 @@ const ProfileDataForm = (props: own) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={classes.button}>
-                {/*<Button variant="contained" color="success" size="small" style={{width: '250px', height: "20px"}}>save</Button>*/}
                 <button className={classes.save}>SAVE</button>
             </div>
             {props.error && <div className={classes.formSummaryError}>
@@ -46,8 +45,9 @@ const ProfileDataForm = (props: own) => {
                 <b className={classes.color}>Looking for a job:</b>
                 {<Field component={Input}
                         type="checkbox"
+                        placeholder={"lookingForAJob"}
                         name={"lookingForAJo"}
-                        // validate={required}
+                    // validate={required}
                 />}
             </div>
             <div>
@@ -72,10 +72,11 @@ const ProfileDataForm = (props: own) => {
                     .keys(props.profile.contacts)
                     .map(key => {
                         return <div key={key} className={classes.contact}>
-                                <b className={classes.color}>{key}: {<Field placeholder={key}
-                                    component={Input} name={"contacts." + key}/>}</b>
+                            <b className={classes.color}>{key}: {<Field placeholder={key}
+                                                                        component={Input}
+                                                                        name={"contacts." + key}/>}</b>
                         </div>
-                        })}
+                    })}
             </div>
         </form>
     )
