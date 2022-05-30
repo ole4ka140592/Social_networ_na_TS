@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './Header.module.css'
 import {Navbar} from "../Navbar/Navbar";
+import logoImg from "../../assets/images/logo.png";
 
 
 export type HeaderPropsType = {
@@ -16,14 +17,15 @@ export const Header = (props: HeaderPropsType) => {
                 <img alt=""
                      src='https://www.pngkit.com/png/full/361-3618320_full-hd-pictures-the-social-network-social-network.png'/>
             </div>
-            <div>
+            <div className={classes.navbar}>
                 <Navbar loginOuth={props.loginOuth} isAuth={props.isAuth}/>
             </div>
-            <div className={classes.loginBlock}>
-                <div className={classes.login}>
-                    {props.isAuth &&
-                    <div className={classes.loginItem}>{props.login}</div>}                                     </div>
+
+
+            <div className={classes.login}>
+                {props.isAuth && <div>{props.login}</div>}
             </div>
+
         </div>
     )
 }

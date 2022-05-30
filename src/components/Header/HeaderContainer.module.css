@@ -1,5 +1,25 @@
 .header {
     height: 50px;
-    /*background-color: red;*/
     background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
+
+
+@media screen and (max-width: 810px) {
+    .header {
+        justify-content: center;
+        height: 105px;
+    }
+}
+
+/*@media screen and (max-width: 710px) {*/
+/*    .header {*/
+
+/*        !*justify-content: center;*!*/
+/*        height: 200px;*/
+
+/*    }*/
+/*}*/
