@@ -1,5 +1,6 @@
 import {ActionsTypes} from "./reduxStore";
 
+
 export type DialogsType = {
     id: number
     name: string

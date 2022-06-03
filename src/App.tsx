@@ -1,5 +1,5 @@
-import React, {Component, ComponentType} from 'react';
-import './App.css';
+import React, {Component, ComponentType} from "react";
+import "./App.css";
 import {Redirect, Route, withRouter} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";

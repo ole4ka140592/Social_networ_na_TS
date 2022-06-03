@@ -2,7 +2,7 @@ import {Redirect} from "react-router-dom";
 import React, {ComponentType} from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../redux/reduxStore";
-import {ReactComponent} from "*.svg";
+
 
 type MapStateToPropsType = {
     isAuth: boolean

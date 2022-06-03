@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import classes from './Paginator.module.css'
+import classes from "./Paginator.module.css";
 
 type PaginatorType = {
     totalUsersCount: number

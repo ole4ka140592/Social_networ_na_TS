@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import classes from './MyPosts.module.css'
+import classes from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
 import {PostsType} from "../../../redux/profileReducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";

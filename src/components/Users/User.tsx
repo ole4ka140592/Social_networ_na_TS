@@ -1,5 +1,5 @@
-import classes from './Users.module.css'
-import userPhoto from "../../assets/images/user.png"
+import classes from "./Users.module.css";
+import userPhoto from "../../assets/images/user.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {Paper} from "@material-ui/core";

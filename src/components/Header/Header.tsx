@@ -1,7 +1,6 @@
 import React from "react";
-import classes from './Header.module.css'
+import classes from "./Header.module.css";
 import {Navbar} from "../Navbar/Navbar";
-import logoImg from "../../assets/images/logo.png";
 
 
 export type HeaderPropsType = {

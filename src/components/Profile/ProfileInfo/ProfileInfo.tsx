@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import classes from './ProfileInfo.module.css'
+import classes from "./ProfileInfo.module.css";
 import {ContactsType, ProfileType} from "../../../redux/profileReducer";
 import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks/ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";

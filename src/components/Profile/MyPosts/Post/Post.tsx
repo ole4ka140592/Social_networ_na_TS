@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './Post.module.css'
+import classes from "./Post.module.css";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
